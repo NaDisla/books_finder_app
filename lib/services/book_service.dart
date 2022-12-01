@@ -7,7 +7,7 @@ class BookService {
   String baseUrl = "https://www.googleapis.com/books/v1/volumes?q=";
   String maxResults = "&maxResults=40";
 
-  Future<Book> getAllBooks(String title) async {
+  Future<List<Item>> getAllBooks(String title) async {
     Book parsedBooks;
     Uri baseUrlParsed = Uri.parse("$baseUrl$title$maxResults");
     http.Response booksResponse = await client.get(baseUrlParsed);
@@ -15,9 +15,9 @@ class BookService {
     if (booksResponse.statusCode == 200) {
       String jsonBooks = booksResponse.body;
       parsedBooks = Book.fromApiBooks(json.decode(jsonBooks));
-      return parsedBooks;
+      return parsedBooks.items;
     } else {
-      throw "Failed getting books";
+      throw Exception("Failed getting books");
     }
   }
 }

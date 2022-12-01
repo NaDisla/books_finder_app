@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:book_finder_app/models/models.dart';
@@ -13,17 +16,90 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController bookTitleController = TextEditingController();
   BookService bookService = BookService();
+  bool hasBooks = false;
+  List<Item> obtainedBooks = [];
+  Timer timer = Timer(const Duration(seconds: 2), () {});
+
+  void searchBook(String book) async {
+    if (book.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Empty title"),
+              content: const Text("Please, provide the book title."),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("OK"))
+              ],
+            );
+          });
+    } else {
+      try {
+        showDialog(
+            context: context,
+            builder: (BuildContext builderContext) {
+              timer = Timer(const Duration(seconds: 2), () {
+                Navigator.of(context).pop();
+              });
+
+              return const AlertDialog(
+                backgroundColor: Colors.white,
+                title: Text('Searching book'),
+                content: SingleChildScrollView(
+                  child: Text('Please wait...🔍'),
+                ),
+              );
+            }).then((val) {
+          if (timer.isActive) {
+            timer.cancel();
+          }
+        });
+
+        List<Item> searchResults = await bookService.getAllBooks(book);
+
+        if (searchResults.isNotEmpty) {
+          obtainedBooks = searchResults;
+          setState(() => hasBooks = true);
+        }
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text("An error occurred"),
+                content: Text("An error occurred 🙁 ${e.toString()}"),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text("OK"))
+                ],
+              );
+            });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          Center(
-            child: Lottie.asset(
-              'assets/icon-home.json',
-              width: 210.0,
-              height: 210.0,
+          const SizedBox(
+            height: 55,
+          ),
+          SizedBox(
+            height: 120,
+            child: OverflowBox(
+              minHeight: 170,
+              maxHeight: 220,
+              child: Lottie.asset(
+                'assets/icon-home.json',
+                width: 210.0,
+                height: 210.0,
+              ),
             ),
           ),
           const Text(
@@ -57,10 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () async {
-                  Book searchedBook =
-                      await bookService.getAllBooks(bookTitleController.text);
-                },
+                onPressed: () => searchBook(bookTitleController.text),
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(const Color(0xFFFACF4F)),
@@ -82,6 +155,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          hasBooks
+              ? BooksListWidget(bookItems: obtainedBooks)
+              : Container(
+                  height: 500,
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Your results will appear here. Let's start searching! 🙂 ",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.amber[100],
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
         ],
       ),
       backgroundColor: const Color(0xFF97978D),
