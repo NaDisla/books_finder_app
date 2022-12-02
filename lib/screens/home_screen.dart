@@ -118,12 +118,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 290.0,
                 child: TextField(
                   controller: bookTitleController,
+                  textCapitalization: TextCapitalization.sentences,
                   decoration: const InputDecoration(
-                    focusColor: Colors.white,
                     hintText: 'Book title',
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: Colors.black),
                     ),
                     filled: true,
                     fillColor: Colors.white,
@@ -133,7 +137,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () => searchBook(bookTitleController.text),
+                onPressed: () {
+                  searchBook(bookTitleController.text);
+                  FocusScope.of(context).unfocus();
+                  bookTitleController.clear();
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(const Color(0xFFFACF4F)),

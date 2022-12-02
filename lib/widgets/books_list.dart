@@ -41,8 +41,9 @@ class _BooksListWidgetState extends State<BooksListWidget> {
     return Container(
       height: 500,
       alignment: Alignment.center,
-      margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+      margin: const EdgeInsets.only(left: 10.0, right: 10.0, top: 5.0),
       child: ListView.builder(
+        padding: const EdgeInsets.all(0.0),
         itemCount: widget.bookItems.length,
         itemBuilder: ((context, index) {
           return SizedBox(
