@@ -4,6 +4,6 @@ class ImageLinks {
   ImageLinks({required this.thumbnail});
 
   factory ImageLinks.fromApiJson(Map<String, dynamic> json) {
-    return ImageLinks(thumbnail: json['thumbnail']!);
+    return ImageLinks(thumbnail: json['thumbnail']);
   }
 }

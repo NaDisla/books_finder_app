@@ -60,7 +60,8 @@ class _BooksListWidgetState extends State<BooksListWidget> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.network(
-                        widget.bookItems[index].volumeInfo.imageLinks.thumbnail,
+                        widget
+                            .bookItems[index].volumeInfo.imageLinks!.thumbnail,
                         width: 100,
                         fit: BoxFit.fill,
                       ),

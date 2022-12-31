@@ -5,7 +5,7 @@ class VolumeInfo {
   List<String> authors;
   String publishedDate;
   String description;
-  ImageLinks imageLinks;
+  ImageLinks? imageLinks;
 
   VolumeInfo(
       {required this.title,
@@ -16,12 +16,17 @@ class VolumeInfo {
 
   factory VolumeInfo.fromApiJson(Map<String, dynamic> json) {
     return VolumeInfo(
-        title: json['title']!,
-        authors: json['authors'] == null
-            ? []
-            : List<String>.from(json['authors'].map((x) => x)),
-        publishedDate: json['publishedDate'] ?? '',
-        description: json['description'] ?? '',
-        imageLinks: ImageLinks.fromApiJson(json['imageLinks']));
+      title: json['title']!,
+      authors: json['authors'] == null
+          ? []
+          : List<String>.from(json['authors'].map((x) => x)),
+      publishedDate: json['publishedDate'] ?? '',
+      description: json['description'] ?? '',
+      imageLinks: ImageLinks.fromApiJson(json['imageLinks'] ??
+          {
+            'thumbnail':
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+          }),
+    );
   }
 }
