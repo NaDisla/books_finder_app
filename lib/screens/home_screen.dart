@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -39,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       try {
         showDialog(
             context: context,
-            builder: (BuildContext builderContext) {
+            builder: (context) {
               timer = Timer(const Duration(seconds: 2), () {
                 Navigator.of(context).pop();
               });
@@ -165,17 +164,20 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           hasBooks
               ? BooksListWidget(bookItems: obtainedBooks)
-              : Container(
-                  height: 500,
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Your results will appear here. Let's start searching! 🙂 ",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.amber[100],
-                      fontWeight: FontWeight.bold,
+              : Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(2.0),
+                    height: 500,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Your results will appear here. Let's start searching! 🙂",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.amber[100],
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
         ],
