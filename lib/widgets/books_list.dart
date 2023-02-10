@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:book_finder_app/models/models.dart';
 import 'package:book_finder_app/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class BooksListWidget extends StatefulWidget {
   final List<Item> bookItems;
@@ -62,11 +63,12 @@ class _BooksListWidgetState extends State<BooksListWidget> {
                         padding: const EdgeInsets.all(10.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            widget.bookItems[index].volumeInfo.imageLinks!
-                                .thumbnail,
-                            width: 100,
+                          child: FadeInImage.memoryNetwork(
+                            placeholder: kTransparentImage,
+                            image: widget.bookItems[index].volumeInfo
+                                .imageLinks!.thumbnail,
                             fit: BoxFit.fill,
+                            width: 100,
                           ),
                         ),
                       ),
