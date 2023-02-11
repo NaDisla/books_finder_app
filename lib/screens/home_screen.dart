@@ -8,7 +8,6 @@ import 'package:book_finder_app/services/services.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -33,6 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () => Navigator.pop(context),
                     child: const Text("OK"))
               ],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
             );
           });
     } else {
@@ -43,12 +45,16 @@ class _HomeScreenState extends State<HomeScreen> {
               timer = Timer(const Duration(seconds: 2), () {
                 Navigator.of(context).pop();
               });
-
-              return const AlertDialog(
+              return AlertDialog(
                 backgroundColor: Colors.white,
-                title: Text('Searching book'),
-                content: SingleChildScrollView(
-                  child: Text('Please wait...🔍'),
+                title: Text('Searching book...'),
+                content: Lottie.asset(
+                  'assets/book-search.json',
+                  width: 180.0,
+                  height: 180.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
               );
             }).then((val) {
@@ -56,9 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             timer.cancel();
           }
         });
-
         List<Item> searchResults = await bookService.getAllBooks(book);
-
         if (searchResults.isNotEmpty) {
           obtainedBooks = searchResults;
           setState(() => hasBooks = true);
@@ -69,12 +73,15 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context) {
               return AlertDialog(
                 title: const Text("An error occurred"),
-                content: Text("An error occurred 🙁 ${e.toString()}"),
+                content: Text("An error occurred 🙁: ${e.toString()}"),
                 actions: [
                   TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: const Text("OK"))
                 ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
               );
             });
       }
