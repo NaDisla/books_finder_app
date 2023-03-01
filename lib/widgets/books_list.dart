@@ -35,7 +35,7 @@ class _BooksListWidgetState extends State<BooksListWidget> {
     } else if (authors.length == 1) {
       return Text("Author: ${authors[0]}", overflow: TextOverflow.ellipsis);
     } else {
-      return const Text('Unknown');
+      return const Text('Author: Unknown');
     }
   }
 
@@ -92,72 +92,86 @@ class _BooksListWidgetState extends State<BooksListWidget> {
                                 ),
                               ),
                               authorsList(index),
-                              Text(
-                                "Published date: ${widget.bookItems[index].volumeInfo.publishedDate}",
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: Text(
-                                            widget.bookItems[index].volumeInfo
-                                                .title,
-                                            textAlign: TextAlign.justify,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15.0,
-                                            ),
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          content:
-                                              "${widget.bookItems[index].volumeInfo.description}" !=
-                                                      ''
-                                                  ? Text(
-                                                      widget
-                                                          .bookItems[index]
-                                                          .volumeInfo
-                                                          .description,
-                                                      maxLines: 15,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign:
-                                                          TextAlign.justify,
-                                                      style: TextStyle(),
-                                                    )
-                                                  : Text(
-                                                      'Sorry does not have the description.'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context),
-                                              child: Text('OK'),
-                                            ),
-                                            TextButton(
-                                              onPressed: () {
-                                                launchUrlString(
-                                                    'https://books.google.com.do/books?id=${widget.bookItems[index].id}&dq=${widget.bookItems[index].volumeInfo.title}',
-                                                    mode: LaunchMode
-                                                        .externalApplication);
-                                              },
-                                              child: Text('Read more'),
-                                            )
-                                          ],
-                                        );
-                                      });
-                                },
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.amber[50],
-                                ),
-                                child: const Text(
-                                  'Description',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              )
+                              widget.bookItems[index].volumeInfo
+                                          .publishedDate !=
+                                      ''
+                                  ? Text(
+                                      "Published date: ${widget.bookItems[index].volumeInfo.publishedDate}",
+                                    )
+                                  : Text('Published date: Unknown'),
+                              widget.bookItems[index].volumeInfo.description !=
+                                      ''
+                                  ? TextButton(
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                  widget.bookItems[index]
+                                                      .volumeInfo.title,
+                                                  textAlign: TextAlign.justify,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15.0,
+                                                  ),
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                content: Text(
+                                                  widget.bookItems[index]
+                                                      .volumeInfo.description,
+                                                  maxLines: 15,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.justify,
+                                                  style: TextStyle(),
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
+                                                    child: Text('OK'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      launchUrlString(
+                                                          'https://books.google.com.do/books?id=${widget.bookItems[index].id}&dq=${widget.bookItems[index].volumeInfo.title}',
+                                                          mode: LaunchMode
+                                                              .externalApplication);
+                                                    },
+                                                    child: Text('More details'),
+                                                  )
+                                                ],
+                                              );
+                                            });
+                                      },
+                                      style: TextButton.styleFrom(
+                                        backgroundColor: Colors.amber[50],
+                                      ),
+                                      child: const Text(
+                                        'Description',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    )
+                                  : TextButton(
+                                      child: Text(
+                                        'More details',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      onPressed: () {
+                                        launchUrlString(
+                                            'https://books.google.com.do/books?id=${widget.bookItems[index].id}&dq=${widget.bookItems[index].volumeInfo.title}',
+                                            mode:
+                                                LaunchMode.externalApplication);
+                                      },
+                                      style: TextButton.styleFrom(
+                                        backgroundColor: Colors.amber[50],
+                                      ),
+                                    )
                             ],
                           ),
                         ),
