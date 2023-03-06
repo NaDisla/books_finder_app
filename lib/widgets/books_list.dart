@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/models/models.dart';
 import 'package:book_finder_app/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -26,16 +28,17 @@ class _BooksListWidgetState extends State<BooksListWidget> {
 
   Widget authorsList(int idx) {
     List<String> authors = widget.bookItems[idx].volumeInfo.authors;
-    String finalAuthors = "Authors: ";
+    String finalAuthors = AppLocale.bookAuthors.getString(context);
     if (authors.length > 1) {
       for (var author in widget.bookItems[idx].volumeInfo.authors) {
         finalAuthors += "$author,";
       }
       return Text(finalAuthors, overflow: TextOverflow.ellipsis);
     } else if (authors.length == 1) {
-      return Text("Author: ${authors[0]}", overflow: TextOverflow.ellipsis);
+      return Text("${AppLocale.bookAuthor.getString(context)} ${authors[0]}",
+          overflow: TextOverflow.ellipsis);
     } else {
-      return const Text('Author: Unknown');
+      return Text(AppLocale.bookUnknownAuthor.getString(context));
     }
   }
 
@@ -96,9 +99,10 @@ class _BooksListWidgetState extends State<BooksListWidget> {
                                           .publishedDate !=
                                       ''
                                   ? Text(
-                                      "Published date: ${widget.bookItems[index].volumeInfo.publishedDate}",
+                                      "${AppLocale.bookPublishedDate.getString(context)} ${widget.bookItems[index].volumeInfo.publishedDate}",
                                     )
-                                  : Text('Published date: Unknown'),
+                                  : Text(AppLocale.bookUnknownPublishedDate
+                                      .getString(context)),
                               widget.bookItems[index].volumeInfo.description !=
                                       ''
                                   ? TextButton(
@@ -143,7 +147,9 @@ class _BooksListWidgetState extends State<BooksListWidget> {
                                                           mode: LaunchMode
                                                               .externalApplication);
                                                     },
-                                                    child: Text('More details'),
+                                                    child: Text(AppLocale
+                                                        .bookMoreDetails
+                                                        .getString(context)),
                                                   )
                                                 ],
                                               );
@@ -152,14 +158,16 @@ class _BooksListWidgetState extends State<BooksListWidget> {
                                       style: TextButton.styleFrom(
                                         backgroundColor: Colors.amber[50],
                                       ),
-                                      child: const Text(
-                                        'Description',
+                                      child: Text(
+                                        AppLocale.bookDescription
+                                            .getString(context),
                                         style: TextStyle(color: Colors.black),
                                       ),
                                     )
                                   : TextButton(
                                       child: Text(
-                                        'More details',
+                                        AppLocale.bookMoreDetails
+                                            .getString(context),
                                         style: TextStyle(color: Colors.black),
                                       ),
                                       onPressed: () {

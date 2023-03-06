@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:book_finder_app/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+
+import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/models/models.dart';
 import 'package:book_finder_app/services/services.dart';
+import 'package:book_finder_app/widgets/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool hasBooks = false;
   List<Item> obtainedBooks = [];
   Timer timer = Timer(const Duration(seconds: 2), () {});
+  bool isEnglish = true;
+  final FlutterLocalization _localization = FlutterLocalization.instance;
 
   void searchBook(String book) async {
     if (book.isEmpty) {
@@ -25,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text("Empty title"),
-              content: const Text("Please, provide the book title."),
+              title: Text(AppLocale.alertEmptyTitleHeader.getString(context)),
+              content: Text(AppLocale.alertEmptyTitleDesc.getString(context)),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.pop(context),
@@ -47,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               });
               return AlertDialog(
                 backgroundColor: Colors.white,
-                title: Text('Searching book...'),
+                title: Text(AppLocale.alertSearchingBook.getString(context)),
                 content: Lottie.asset(
                   'assets/book-search.json',
                   width: 180.0,
@@ -72,8 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: const Text("An error occurred"),
-                content: Text("An error occurred 🙁: ${e.toString()}"),
+                title:
+                    Text(AppLocale.alertSearchErrorHeader.getString(context)),
+                content:
+                    Text("${AppLocale.alertSearchErrorDesc} ${e.toString()}."),
                 actions: [
                   TextButton(
                       onPressed: () => Navigator.pop(context),
@@ -120,8 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                const Text(
-                  'Search any book',
+                Text(
+                  AppLocale.homeTitle.getString(context),
                   style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
@@ -137,8 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: TextField(
                         controller: bookTitleController,
                         textCapitalization: TextCapitalization.sentences,
-                        decoration: const InputDecoration(
-                          hintText: 'Book title',
+                        decoration: InputDecoration(
+                          hintText: AppLocale.hintText.getString(context),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                             borderRadius:
@@ -173,8 +180,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(25.0),
                         )),
                       ),
-                      child: const Text(
-                        'Search',
+                      child: Text(
+                        AppLocale.buttonTitle.getString(context),
                         style: TextStyle(
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold,
@@ -191,8 +198,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.all(2.0),
                           height: 500,
                           alignment: Alignment.center,
-                          child: const Text(
-                            "Your results will appear here. Let's start searching! 🙂",
+                          child: Text(
+                            AppLocale.homeDescription.getString(context),
                             style: TextStyle(
                               fontSize: 18.0,
                               color: Colors.white,
@@ -207,6 +214,32 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      floatingActionButton: SizedBox(
+        height: 70,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Switch(
+            onChanged: (bool value) {
+              setState(() {
+                isEnglish = value;
+                if (isEnglish) {
+                  _localization.translate('en');
+                } else {
+                  _localization.translate('es');
+                }
+              });
+            },
+            value: isEnglish,
+            activeColor: Colors.white,
+            inactiveTrackColor: Colors.white54,
+            activeThumbImage:
+                Image.asset('assets/images/us_icon.png', scale: 17.0).image,
+            inactiveThumbImage:
+                Image.asset('assets/images/es_icon.png', scale: 17.0).image,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
 }
