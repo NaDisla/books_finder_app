@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (isEnglish) {
                   _localization.translate('en');
                 } else {
-                  _localization.translate('es');
+                  _localization.translate('es', save: false);
                 }
               });
             },
