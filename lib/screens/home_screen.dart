@@ -20,19 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Item> obtainedBooks = [];
   Timer timer = Timer(const Duration(seconds: 2), () {});
   final FlutterLocalization _localization = FlutterLocalization.instance;
-  //ImageProvider backgroundImage = AssetImage('assets/images/background.webp');
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   backgroundImage = Image.asset("assets/images/background.webp");
-  // }
-
-  // @override
-  // void didChangeDependencies() {
-  //   precacheImage(backgroundImage.image, context);
-  //   super.didChangeDependencies();
-  // }
 
   void changeHasBooks(List<Item> _obtainedBooks) {
     obtainedBooks = _obtainedBooks;
