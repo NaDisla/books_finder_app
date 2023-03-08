@@ -40,6 +40,9 @@ class _BookFinderAppState extends State<BookFinderApp> {
 
   @override
   Widget build(BuildContext context) {
+    //precacheImage(AssetImage('assets/images/background.webp'), context);
+    // precacheImage(
+    //     Image.asset('assets/images/us_icon.png', scale: 17.0).image, context);
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
