@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget SwitchLanguageWidget(Function translate, bool isEnglish) {
+Widget SwitchLanguageWidget(
+    {required Function translate, required bool isEnglish}) {
   ImageProvider usIcon =
       Image.asset('assets/images/us_icon.png', scale: 17.0).image;
   return SizedBox(

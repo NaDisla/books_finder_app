@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
 Widget SearchFieldWidget(
-    BuildContext context, TextEditingController bookTitleController) {
+    {required BuildContext context,
+    required TextEditingController bookTitleController}) {
   return SizedBox(
     width: MediaQuery.of(context).size.width * 0.7,
     child: TextField(

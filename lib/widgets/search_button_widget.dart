@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:lottie/lottie.dart';
 
-Widget SearchButtonWidget(BuildContext context,
-    TextEditingController bookTitleController, Function hasBooks) {
+Widget SearchButtonWidget(
+    {required BuildContext context,
+    required TextEditingController bookTitleController,
+    required Function hasBooks}) {
   BookService bookService = BookService();
   Timer timer = Timer(const Duration(seconds: 2), () {});
 

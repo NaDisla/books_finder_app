@@ -82,35 +82,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SearchFieldWidget(context, bookTitleController),
+                    SearchFieldWidget(
+                        context: context,
+                        bookTitleController: bookTitleController),
                     SearchButtonWidget(
-                        context, bookTitleController, changeHasBooks)
+                        context: context,
+                        bookTitleController: bookTitleController,
+                        hasBooks: changeHasBooks),
                   ],
                 ),
                 hasBooks
                     ? BooksListWidget(bookItems: obtainedBooks)
-                    : Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(2.0),
-                          height: 500,
-                          alignment: Alignment.center,
-                          child: Text(
-                            AppLocale.homeDescription.getString(context),
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
+                    : HomeDescriptionWidget(context: context),
               ],
             ),
           ),
         ),
       ),
-      floatingActionButton: SwitchLanguageWidget(translate, isEnglish),
+      floatingActionButton:
+          SwitchLanguageWidget(translate: translate, isEnglish: isEnglish),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }

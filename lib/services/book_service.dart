@@ -1,6 +1,7 @@
-import 'package:http/http.dart' as http;
-import 'package:book_finder_app/models/models.dart';
 import 'dart:convert';
+
+import 'package:book_finder_app/models/models.dart';
+import 'package:http/http.dart' as http;
 
 class BookService {
   http.Client client = http.Client();
@@ -19,5 +20,11 @@ class BookService {
     } else {
       throw Exception("Failed getting books");
     }
+  }
+
+  static String getUrlBook(String id, String volumeInfoTitle) {
+    String launchUrlBook =
+        "https://books.google.com.do/books?id=${id}&dq=${volumeInfoTitle}";
+    return launchUrlBook;
   }
 }
