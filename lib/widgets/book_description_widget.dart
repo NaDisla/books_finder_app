@@ -8,7 +8,7 @@ Widget BookDescriptionWidget(
     {required BuildContext context,
     required String bookTitle,
     required String bookDescription,
-    required bookId,
+    required String bookId,
     required String volumeInfoTitle}) {
   return TextButton(
     onPressed: () {

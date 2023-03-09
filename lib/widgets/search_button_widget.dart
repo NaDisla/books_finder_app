@@ -52,11 +52,7 @@ Widget SearchButtonWidget(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
               );
-            }).then((val) {
-          if (timer.isActive) {
-            timer.cancel();
-          }
-        });
+            });
         List<Item> searchResults = await bookService.getAllBooks(book);
         if (searchResults.isNotEmpty) {
           hasBooks(searchResults);
@@ -68,8 +64,8 @@ Widget SearchButtonWidget(
               return AlertDialog(
                 title:
                     Text(AppLocale.alertSearchErrorHeader.getString(context)),
-                content:
-                    Text("${AppLocale.alertSearchErrorDesc} ${e.toString()}."),
+                content: Text(
+                    "${AppLocale.alertSearchErrorDesc.getString(context)} ${e.toString()}."),
                 actions: [
                   TextButton(
                       onPressed: () => Navigator.pop(context),

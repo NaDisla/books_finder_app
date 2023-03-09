@@ -14,14 +14,7 @@ class BooksListWidget extends StatefulWidget {
 
 class _BooksListWidgetState extends State<BooksListWidget> {
   BookService bookService = BookService();
-  late Future<List<Item>> futureBooks;
   bool hasBooks = false;
-
-  @override
-  void initState() {
-    super.initState();
-    futureBooks = bookService.getAllBooks("title");
-  }
 
   @override
   Widget build(BuildContext context) {
