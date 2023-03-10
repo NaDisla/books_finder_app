@@ -12,7 +12,6 @@ Widget SearchButtonWidget(
     required TextEditingController bookTitleController,
     required Function hasBooks}) {
   BookService bookService = BookService();
-  Timer timer = Timer(const Duration(seconds: 2), () {});
 
   void searchBook(String book) async {
     if (book.isEmpty) {
@@ -34,10 +33,11 @@ Widget SearchButtonWidget(
           });
     } else {
       try {
+        List<Item> searchResults = await bookService.getAllBooks(book);
         showDialog(
             context: context,
             builder: (context) {
-              timer = Timer(const Duration(seconds: 2), () {
+              Timer(const Duration(seconds: 2), () {
                 Navigator.of(context).pop();
               });
               return AlertDialog(
@@ -53,7 +53,6 @@ Widget SearchButtonWidget(
                 ),
               );
             });
-        List<Item> searchResults = await bookService.getAllBooks(book);
         if (searchResults.isNotEmpty) {
           hasBooks(searchResults);
         }
