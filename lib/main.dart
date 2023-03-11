@@ -48,7 +48,7 @@ class _BookFinderAppState extends State<BookFinderApp> {
       supportedLocales: _localization.supportedLocales,
       localizationsDelegates: _localization.localizationsDelegates,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

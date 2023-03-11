@@ -14,6 +14,7 @@ Widget BookDescriptionWidget(
     onPressed: () {
       showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (context) {
             return AlertDialog(
               title: Text(

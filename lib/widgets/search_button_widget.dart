@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/models/models.dart';
 import 'package:book_finder_app/services/services.dart';
@@ -17,6 +15,7 @@ Widget SearchButtonWidget(
     if (book.isEmpty) {
       showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (context) {
             return AlertDialog(
               title: Text(AppLocale.alertEmptyTitleHeader.getString(context)),
@@ -32,50 +31,53 @@ Widget SearchButtonWidget(
             );
           });
     } else {
-      try {
-        List<Item> searchResults = await bookService.getAllBooks(book);
-        showDialog(
-            context: context,
-            builder: (context) {
-              Timer(const Duration(seconds: 2), () {
-                Navigator.of(context).pop();
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return AlertDialog(
+              backgroundColor: Colors.white,
+              title: Text(AppLocale.alertSearchingBook.getString(context)),
+              content: Lottie.asset(
+                'assets/book-search.json',
+                width: 180.0,
+                height: 180.0,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+            );
+          });
+      Future.delayed(Duration(seconds: 1), () async {
+        try {
+          List<Item> searchResults = await bookService.getAllBooks(book);
+          if (searchResults.isNotEmpty) {
+            hasBooks(searchResults);
+            Navigator.of(context).pop();
+          }
+        } catch (e) {
+          Navigator.of(context).pop();
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) {
+                return AlertDialog(
+                  title:
+                      Text(AppLocale.alertSearchErrorHeader.getString(context)),
+                  content: Text(
+                      "${AppLocale.alertSearchErrorDesc.getString(context)} ${e.toString()}."),
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text("OK"))
+                  ],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                );
               });
-              return AlertDialog(
-                backgroundColor: Colors.white,
-                title: Text(AppLocale.alertSearchingBook.getString(context)),
-                content: Lottie.asset(
-                  'assets/book-search.json',
-                  width: 180.0,
-                  height: 180.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-              );
-            });
-        if (searchResults.isNotEmpty) {
-          hasBooks(searchResults);
         }
-      } catch (e) {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title:
-                    Text(AppLocale.alertSearchErrorHeader.getString(context)),
-                content: Text(
-                    "${AppLocale.alertSearchErrorDesc.getString(context)} ${e.toString()}."),
-                actions: [
-                  TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text("OK"))
-                ],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-              );
-            });
-      }
+      });
     }
   }
 
