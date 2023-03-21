@@ -51,7 +51,7 @@ Widget BookDetailWidget(
                   ),
                   onPressed: () {
                     Uri bookUrl = Uri.parse(
-                      BookService.getUrlBook(id, volumeInfoTitle),
+                      BookService.getBookUrl(id, volumeInfoTitle),
                     );
                     launchUrlString(
                       bookUrl.toString(),

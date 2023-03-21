@@ -22,7 +22,7 @@ class BookService {
     }
   }
 
-  static String getUrlBook(String id, String volumeInfoTitle) {
+  static String getBookUrl(String id, String volumeInfoTitle) {
     String launchUrlBook =
         "https://books.google.com.do/books?id=${id}&dq=${volumeInfoTitle}";
     return launchUrlBook;

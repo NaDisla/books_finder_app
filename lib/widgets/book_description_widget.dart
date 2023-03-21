@@ -43,7 +43,7 @@ Widget BookDescriptionWidget(
                 TextButton(
                   onPressed: () {
                     Uri bookUrl = Uri.parse(
-                      BookService.getUrlBook(bookId, volumeInfoTitle),
+                      BookService.getBookUrl(bookId, volumeInfoTitle),
                     );
                     launchUrlString(
                       bookUrl.toString(),
