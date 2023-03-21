@@ -3,7 +3,6 @@ import 'package:book_finder_app/services/services.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 Widget BookDetailWidget(
@@ -51,8 +50,9 @@ Widget BookDetailWidget(
                     style: TextStyle(color: Colors.black),
                   ),
                   onPressed: () {
-                    Uri bookUrl =
-                        Uri.parse(BookService.getUrlBook(id, volumeInfoTitle));
+                    Uri bookUrl = Uri.parse(
+                      BookService.getUrlBook(id, volumeInfoTitle),
+                    );
                     launchUrlString(
                       bookUrl.toString(),
                       mode: LaunchMode.externalApplication,
