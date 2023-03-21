@@ -42,8 +42,9 @@ Widget BookDescriptionWidget(
                 ),
                 TextButton(
                   onPressed: () {
-                    launchUrlString(
-                        BookService.getUrlBook(bookId, volumeInfoTitle),
+                    Uri bookUrl = Uri.parse(
+                        BookService.getUrlBook(bookId, volumeInfoTitle));
+                    launchUrlString(bookUrl.toString(),
                         mode: LaunchMode.externalApplication);
                   },
                   child: Text(AppLocale.bookMoreDetails.getString(context)),
