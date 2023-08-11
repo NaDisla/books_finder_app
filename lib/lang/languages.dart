@@ -17,6 +17,7 @@ mixin AppLocale {
   static const String bookUnknownAuthor = "Author: Unknown";
   static const String bookPublishedDate = "Published date: ";
   static const String bookUnknownPublishedDate = "Published date: Unknown";
+  //static const String btnSearch = "Search";
 
   static const Map<String, dynamic> EN = {
     alertEmptyTitleHeader: "Empty title",
@@ -35,6 +36,7 @@ mixin AppLocale {
     bookUnknownAuthor: "Author: Unknown",
     bookPublishedDate: "Published date: ",
     bookUnknownPublishedDate: "Published date: Unknown",
+    //btnSearch: "Search",
   };
   static const Map<String, dynamic> ES = {
     alertEmptyTitleHeader: "Título en blanco",
@@ -52,6 +54,7 @@ mixin AppLocale {
     bookAuthor: "Autor: ",
     bookUnknownAuthor: "Autor: Desconocido",
     bookPublishedDate: "Fecha de publicación: ",
-    bookUnknownPublishedDate: "Fecha de publicación: Desconocida"
+    bookUnknownPublishedDate: "Fecha de publicación: Desconocida",
+    //btnSearch: "Buscar",
   };
 }

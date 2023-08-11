@@ -7,3 +7,5 @@ export 'home_description_widget.dart';
 export 'search_button_widget.dart';
 export 'search_field_widget.dart';
 export 'switch_language_widget.dart';
+export 'bottom_navigation_bar_widget.dart';
+export 'bottom_navigation_bar_button_widget.dart';
