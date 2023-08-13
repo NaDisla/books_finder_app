@@ -18,7 +18,7 @@ class BookService {
       parsedBooks = Book.fromApiBooks(json.decode(jsonBooks));
       return parsedBooks.items;
     } else {
-      throw Exception("Failed getting books");
+      return [];
     }
   }
 

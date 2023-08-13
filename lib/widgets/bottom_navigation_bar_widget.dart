@@ -1,7 +1,8 @@
 import 'dart:ui';
-
+import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
   const BottomNavigationBarWidget({super.key});
@@ -57,7 +58,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                       ? BottomNavigationBarButtonWidget(
                           icon: Icons.search,
                           btnColor: Color(0xFF967509),
-                          btnText: 'Search',
+                          btnText: AppLocale.btnSearch.getString(context),
                           isImageButton: false,
                           isImageButtonSelected: false,
                           shadowList: shadowList,
@@ -65,7 +66,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                       : BottomNavigationBarButtonWidget(
                           icon: Icons.search,
                           btnColor: Colors.black,
-                          btnText: 'Search',
+                          btnText: AppLocale.btnSearch.getString(context),
                           isImageButton: false,
                           isImageButtonSelected: false,
                         ),
@@ -88,14 +89,14 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                       ? BottomNavigationBarButtonWidget(
                           imagePath: 'assets/images/favorite_orange_icon.png',
                           btnColor: Color(0xFF967509),
-                          btnText: 'Favorites',
+                          btnText: AppLocale.btnFavorites.getString(context),
                           isImageButton: false,
                           isImageButtonSelected: true,
                           shadowList: shadowList,
                         )
                       : BottomNavigationBarButtonWidget(
                           btnColor: Colors.black,
-                          btnText: 'Favorites',
+                          btnText: AppLocale.btnFavorites.getString(context),
                           isImageButton: true,
                           isImageButtonSelected: false,
                           imagePath: 'assets/images/favorite_black_icon.png',

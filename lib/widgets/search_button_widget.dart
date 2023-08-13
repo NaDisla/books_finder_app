@@ -96,7 +96,7 @@ Widget SearchButtonWidget(
       )),
     ),
     child: Text(
-      AppLocale.buttonTitle.getString(context),
+      '', //AppLocale.buttonTitle.getString(context),
       style: TextStyle(
         fontSize: 17.0,
         fontWeight: FontWeight.bold,

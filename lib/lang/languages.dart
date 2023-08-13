@@ -5,9 +5,7 @@ mixin AppLocale {
   static const String alertSearchErrorHeader = "An error occurred";
   static const String alertSearchErrorDesc =
       "An error occurred searching the book 😥: ";
-  static const String homeTitle = "Search any book";
-  static const String hintText = "Book title";
-  static const String buttonTitle = "Search";
+  static const String hintText = "Search by title, author or topic";
   static const String homeDescription =
       "Your results will appear here. Let's start searching! 🙂";
   static const String bookMoreDetails = "More details";
@@ -17,7 +15,8 @@ mixin AppLocale {
   static const String bookUnknownAuthor = "Author: Unknown";
   static const String bookPublishedDate = "Published date: ";
   static const String bookUnknownPublishedDate = "Published date: Unknown";
-  //static const String btnSearch = "Search";
+  static const String btnSearch = "Search";
+  static const String btnFavorites = "Favorites";
 
   static const Map<String, dynamic> EN = {
     alertEmptyTitleHeader: "Empty title",
@@ -25,9 +24,7 @@ mixin AppLocale {
     alertSearchingBook: "Searching book...",
     alertSearchErrorHeader: "An error occurred",
     alertSearchErrorDesc: "An error occurred searching the book 😥: ",
-    homeTitle: "Search any book",
-    hintText: "Book title",
-    buttonTitle: "Search",
+    hintText: "Search by title, author or topic",
     homeDescription: "Your results will appear here. Let's start searching! 🙂",
     bookMoreDetails: "More details",
     bookDescription: "Description",
@@ -36,7 +33,8 @@ mixin AppLocale {
     bookUnknownAuthor: "Author: Unknown",
     bookPublishedDate: "Published date: ",
     bookUnknownPublishedDate: "Published date: Unknown",
-    //btnSearch: "Search",
+    btnSearch: "Search",
+    btnFavorites: "Favorites",
   };
   static const Map<String, dynamic> ES = {
     alertEmptyTitleHeader: "Título en blanco",
@@ -44,9 +42,7 @@ mixin AppLocale {
     alertSearchingBook: "Buscando libro...",
     alertSearchErrorHeader: "Ha ocurrido un error",
     alertSearchErrorDesc: "Ha ocurrido un error buscando el libro 😥: ",
-    homeTitle: "Busca cualquier libro",
-    hintText: "Título del libro",
-    buttonTitle: "Buscar",
+    hintText: "Buscar por título, autor o tema",
     homeDescription: "Tus resultados aparecerán aquí. ¡Empecemos a buscar! 🙂",
     bookMoreDetails: "Más detalles",
     bookDescription: "Descripción",
@@ -55,6 +51,7 @@ mixin AppLocale {
     bookUnknownAuthor: "Autor: Desconocido",
     bookPublishedDate: "Fecha de publicación: ",
     bookUnknownPublishedDate: "Fecha de publicación: Desconocida",
-    //btnSearch: "Buscar",
+    btnSearch: "Buscar",
+    btnFavorites: "Favoritos",
   };
 }
