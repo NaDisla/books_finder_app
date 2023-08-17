@@ -62,20 +62,22 @@ class BookDetailWidget extends StatelessWidget {
                       bookId: id,
                       volumeInfoTitle: volumeInfoTitle),
                 )
-              : TextButton(
-                  child: Text(
-                    AppLocale.bookMoreDetails.getString(context),
-                    style: TextStyle(color: Colors.black),
+              : Expanded(
+                  child: TextButton(
+                    child: BookButtonInfoWidget(
+                      text: AppLocale.bookMoreDetails.getString(context),
+                    ),
+                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                    onPressed: () {
+                      Uri bookUrl = Uri.parse(
+                        BookService.getBookUrl(id, volumeInfoTitle),
+                      );
+                      launchUrlString(
+                        bookUrl.toString(),
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
                   ),
-                  onPressed: () {
-                    Uri bookUrl = Uri.parse(
-                      BookService.getBookUrl(id, volumeInfoTitle),
-                    );
-                    launchUrlString(
-                      bookUrl.toString(),
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
                 )
         ],
       ),

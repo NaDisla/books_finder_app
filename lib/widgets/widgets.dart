@@ -9,3 +9,4 @@ export 'search_field_widget.dart';
 export 'switch_language_widget.dart';
 export 'bottom_navigation_bar_widget.dart';
 export 'bottom_navigation_bar_button_widget.dart';
+export 'book_button_info_widget.dart';

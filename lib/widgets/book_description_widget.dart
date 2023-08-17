@@ -1,5 +1,6 @@
 import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/services/services.dart';
+import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -66,21 +67,8 @@ class BookDescriptionWidget extends StatelessWidget {
             });
       },
       style: TextButton.styleFrom(padding: EdgeInsets.zero),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              AppLocale.bookDescription.getString(context),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                fontStyle: FontStyle.italic,
-                color: Color(0xFF786C44),
-              ),
-            ),
-          ),
-          Icon(Icons.arrow_forward_ios_rounded, color: Color(0xFF786C44)),
-        ],
+      child: BookButtonInfoWidget(
+        text: AppLocale.bookDescription.getString(context),
       ),
     );
   }

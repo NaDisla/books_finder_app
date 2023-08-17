@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     _foundBooks.isNotEmpty
                         ? Container(
-                            height: 322,
+                            height: MediaQuery.of(context).size.height - 370,
                             child: BooksListWidget(bookItems: _foundBooks))
                         : HomeDescriptionWidget(context: context),
                   ],
