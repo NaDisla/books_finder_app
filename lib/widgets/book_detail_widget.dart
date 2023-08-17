@@ -5,45 +5,63 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-Widget BookDetailWidget(
-    {required String volumeInfoTitle,
-    required int index,
-    required BuildContext context,
-    required List<String> authors,
-    required String publishedDate,
-    required String description,
-    required String id}) {
-  return Expanded(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10.0,
-        horizontal: 5.0,
-      ),
+class BookDetailWidget extends StatelessWidget {
+  final String volumeInfoTitle;
+  final int index;
+  final List<String> authors;
+  final String publishedDate;
+  final String description;
+  final String id;
+  const BookDetailWidget({
+    super.key,
+    required this.volumeInfoTitle,
+    required this.index,
+    required this.authors,
+    required this.publishedDate,
+    required this.description,
+    required this.id,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle dateTextstyle = TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Color(0xFF6A6A6A),
+    );
+    return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             volumeInfoTitle,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 15.0,
+              fontSize: 20.0,
             ),
           ),
+          SizedBox(height: 5.0),
           AuthorsListWidget(index, context, authors),
+          SizedBox(height: 5.0),
           publishedDate != ''
               ? Text(
-                  "${AppLocale.bookPublishedDate.getString(context)} ${publishedDate}",
+                  publishedDate,
+                  style: dateTextstyle,
                 )
-              : Text(AppLocale.bookUnknownPublishedDate.getString(context)),
+              : Text(
+                  AppLocale.bookUnknownPublishedDate.getString(context),
+                  style: dateTextstyle,
+                ),
+          SizedBox(height: 5.0),
           description != ''
-              ? BookDescriptionWidget(
-                  context: context,
-                  bookTitle: volumeInfoTitle,
-                  bookDescription: description,
-                  bookId: id,
-                  volumeInfoTitle: volumeInfoTitle)
+              ? Expanded(
+                  child: BookDescriptionWidget(
+                      bookTitle: volumeInfoTitle,
+                      bookDescription: description,
+                      bookId: id,
+                      volumeInfoTitle: volumeInfoTitle),
+                )
               : TextButton(
                   child: Text(
                     AppLocale.bookMoreDetails.getString(context),
@@ -58,12 +76,9 @@ Widget BookDetailWidget(
                       mode: LaunchMode.externalApplication,
                     );
                   },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.amber[50],
-                  ),
                 )
         ],
       ),
-    ),
-  );
+    );
+  }
 }

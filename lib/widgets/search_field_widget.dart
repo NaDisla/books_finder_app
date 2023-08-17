@@ -17,14 +17,7 @@ class _SearchFieldWidgetState extends State<SearchFieldWidget> {
   BookService bookService = BookService();
   List<Item> _allBooks = [];
 
-  // @override
-  // void initState() {
-  //   _loadBooks();
-  //   super.initState();
-  // }
-
   void _loadBooks() async {
-    //_allBooks = await bookService.getAllBooks(_bookTitleController.text);
     setState(() => SearchFieldWidget.foundBooks = _allBooks);
   }
 

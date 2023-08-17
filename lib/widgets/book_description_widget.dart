@@ -4,64 +4,84 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-Widget BookDescriptionWidget(
-    {required BuildContext context,
-    required String bookTitle,
-    required String bookDescription,
-    required String bookId,
-    required String volumeInfoTitle}) {
-  return TextButton(
-    onPressed: () {
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                bookTitle,
-                textAlign: TextAlign.justify,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.0,
+class BookDescriptionWidget extends StatelessWidget {
+  final String bookTitle;
+  final String bookDescription;
+  final String bookId;
+  final String volumeInfoTitle;
+  const BookDescriptionWidget({
+    super.key,
+    required this.bookTitle,
+    required this.bookDescription,
+    required this.bookId,
+    required this.volumeInfoTitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  bookTitle,
+                  textAlign: TextAlign.justify,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.0,
+                  ),
                 ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              content: Text(
-                bookDescription,
-                maxLines: 15,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.justify,
-                style: TextStyle(),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text('OK'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                TextButton(
-                  onPressed: () {
-                    Uri bookUrl = Uri.parse(
-                      BookService.getBookUrl(bookId, volumeInfoTitle),
-                    );
-                    launchUrlString(
-                      bookUrl.toString(),
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
-                  child: Text(AppLocale.bookMoreDetails.getString(context)),
-                )
-              ],
-            );
-          });
-    },
-    style: TextButton.styleFrom(
-      backgroundColor: Colors.amber[50],
-    ),
-    child: Text(
-      AppLocale.bookDescription.getString(context),
-      style: TextStyle(color: Colors.black),
-    ),
-  );
+                content: Text(
+                  bookDescription,
+                  maxLines: 15,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text('OK'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Uri bookUrl = Uri.parse(
+                        BookService.getBookUrl(bookId, volumeInfoTitle),
+                      );
+                      launchUrlString(
+                        bookUrl.toString(),
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
+                    child: Text(AppLocale.bookMoreDetails.getString(context)),
+                  )
+                ],
+              );
+            });
+      },
+      style: TextButton.styleFrom(padding: EdgeInsets.zero),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              AppLocale.bookDescription.getString(context),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                fontStyle: FontStyle.italic,
+                color: Color(0xFF786C44),
+              ),
+            ),
+          ),
+          Icon(Icons.arrow_forward_ios_rounded, color: Color(0xFF786C44)),
+        ],
+      ),
+    );
+  }
 }

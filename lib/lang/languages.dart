@@ -8,11 +8,10 @@ mixin AppLocale {
   static const String hintText = "Search by title, author or topic";
   static const String homeDescription =
       "Your results will appear here. Let's start searching! 🙂";
-  static const String bookMoreDetails = "More details";
-  static const String bookDescription = "Description";
-  static const String bookAuthors = "Authors: ";
-  static const String bookAuthor = "Author: ";
-  static const String bookUnknownAuthor = "Author: Unknown";
+  static const String bookMoreDetails = "Google Books info";
+  static const String bookDescription = "See full description";
+  static const String bookAuthor = "By: ";
+  static const String bookUnknownAuthor = "Unknown";
   static const String bookPublishedDate = "Published date: ";
   static const String bookUnknownPublishedDate = "Published date: Unknown";
   static const String btnSearch = "Search";
@@ -26,11 +25,10 @@ mixin AppLocale {
     alertSearchErrorDesc: "An error occurred searching the book 😥: ",
     hintText: "Search by title, author or topic",
     homeDescription: "Your results will appear here. Let's start searching! 🙂",
-    bookMoreDetails: "More details",
-    bookDescription: "Description",
-    bookAuthors: "Authors: ",
-    bookAuthor: "Author: ",
-    bookUnknownAuthor: "Author: Unknown",
+    bookMoreDetails: "Google Books info",
+    bookDescription: "See full description",
+    bookAuthor: "By: ",
+    bookUnknownAuthor: "Unknown",
     bookPublishedDate: "Published date: ",
     bookUnknownPublishedDate: "Published date: Unknown",
     btnSearch: "Search",
@@ -44,11 +42,10 @@ mixin AppLocale {
     alertSearchErrorDesc: "Ha ocurrido un error buscando el libro 😥: ",
     hintText: "Buscar por título, autor o tema",
     homeDescription: "Tus resultados aparecerán aquí. ¡Empecemos a buscar! 🙂",
-    bookMoreDetails: "Más detalles",
-    bookDescription: "Descripción",
-    bookAuthors: "Autores: ",
-    bookAuthor: "Autor: ",
-    bookUnknownAuthor: "Autor: Desconocido",
+    bookMoreDetails: "Google Books info",
+    bookDescription: "Ver descripción completa",
+    bookAuthor: "Por: ",
+    bookUnknownAuthor: "Desconocido",
     bookPublishedDate: "Fecha de publicación: ",
     bookUnknownPublishedDate: "Fecha de publicación: Desconocida",
     btnSearch: "Buscar",

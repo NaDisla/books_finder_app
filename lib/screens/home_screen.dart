@@ -113,17 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 25.0),
-                    //SearchFieldWidget(),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //     SearchButtonWidget(
-                    //       context: context,
-                    //       bookTitleController: bookTitleController,
-                    //       hasBooks: changeHasBooks,
-                    //     ),
-                    //   ],
-                    // ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: TextField(
