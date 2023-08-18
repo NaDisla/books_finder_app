@@ -23,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _searchBooks() async {
     String searchTerm = _bookTitleController.text;
-    print(searchTerm);
     if (searchTerm == "") {
       _foundBooks = [];
     } else {
@@ -120,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         controller: _bookTitleController,
                         textCapitalization: TextCapitalization.sentences,
                         style: TextStyle(
-                          color: Color(0xFF786C44).withOpacity(0.7),
+                          color: Color(0xFF786C44),
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                         ),
@@ -155,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? Container(
                             height: MediaQuery.of(context).size.height - 370,
                             child: BooksListWidget(bookItems: _foundBooks))
-                        : HomeDescriptionWidget(context: context),
+                        : HomeDescriptionWidget(),
                   ],
                 ),
               ),

@@ -29,58 +29,56 @@ class BookDetailWidget extends StatelessWidget {
       fontWeight: FontWeight.bold,
       color: Color(0xFF6A6A6A),
     );
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            volumeInfoTitle,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          volumeInfoTitle,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20.0,
           ),
-          SizedBox(height: 5.0),
-          AuthorsListWidget(index, context, authors),
-          SizedBox(height: 5.0),
-          publishedDate != ''
-              ? Text(
-                  publishedDate,
-                  style: dateTextstyle,
-                )
-              : Text(
-                  AppLocale.bookUnknownPublishedDate.getString(context),
-                  style: dateTextstyle,
-                ),
-          SizedBox(height: 5.0),
-          description != ''
-              ? Expanded(
-                  child: BookDescriptionWidget(
-                      bookTitle: volumeInfoTitle,
-                      bookDescription: description,
-                      bookId: id,
-                      volumeInfoTitle: volumeInfoTitle),
-                )
-              : Expanded(
-                  child: TextButton(
-                    child: BookButtonInfoWidget(
-                      text: AppLocale.bookMoreDetails.getString(context),
-                    ),
-                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                    onPressed: () {
-                      Uri bookUrl = Uri.parse(
-                        BookService.getBookUrl(id, volumeInfoTitle),
-                      );
-                      launchUrlString(
-                        bookUrl.toString(),
-                        mode: LaunchMode.externalApplication,
-                      );
-                    },
+        ),
+        SizedBox(height: 5.0),
+        AuthorsListWidget(index, context, authors),
+        SizedBox(height: 5.0),
+        publishedDate != ''
+            ? Text(
+                publishedDate,
+                style: dateTextstyle,
+              )
+            : Text(
+                AppLocale.bookUnknownPublishedDate.getString(context),
+                style: dateTextstyle,
+              ),
+        SizedBox(height: 5.0),
+        description != ''
+            ? Expanded(
+                child: BookDescriptionWidget(
+                    bookTitle: volumeInfoTitle,
+                    bookDescription: description,
+                    bookId: id,
+                    volumeInfoTitle: volumeInfoTitle),
+              )
+            : Expanded(
+                child: TextButton(
+                  child: BookButtonInfoWidget(
+                    text: AppLocale.bookMoreDetails.getString(context),
                   ),
-                )
-        ],
-      ),
+                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                  onPressed: () {
+                    Uri bookUrl = Uri.parse(
+                      BookService.getBookUrl(id, volumeInfoTitle),
+                    );
+                    launchUrlString(
+                      bookUrl.toString(),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
+                ),
+              )
+      ],
     );
   }
 }
