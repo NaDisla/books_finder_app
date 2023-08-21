@@ -4,22 +4,23 @@ import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
-class BottomNavigationBarWidget extends StatefulWidget {
-  const BottomNavigationBarWidget({super.key});
+class BottomNavigationBarWidget extends StatelessWidget {
+  final Function onPressedFn;
+  final bool isSearchPressed;
+  final bool isFavoritesPressed;
 
-  @override
-  State<BottomNavigationBarWidget> createState() =>
-      _BottomNavigationBarWidgetState();
-}
-
-class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
-  bool _isSearchPressed = true, _isFavoritesPressed = false;
-  final List<Shadow> shadowList = const <Shadow>[
-    Shadow(color: Color(0xFF967509), blurRadius: 20.0, offset: Offset(0, 5))
-  ];
+  const BottomNavigationBarWidget({
+    super.key,
+    required this.isSearchPressed,
+    required this.isFavoritesPressed,
+    required this.onPressedFn,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final List<Shadow> shadowList = const <Shadow>[
+      Shadow(color: Color(0xFF967509), blurRadius: 20.0, offset: Offset(0, 5))
+    ];
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(10.0),
@@ -46,15 +47,8 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                     overlayColor: MaterialStateColor.resolveWith(
                         (states) => Color(0xFF967509).withOpacity(0.1)),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      if (_isFavoritesPressed) {
-                        _isSearchPressed = true;
-                        _isFavoritesPressed = false;
-                      }
-                    });
-                  },
-                  child: _isSearchPressed
+                  onPressed: () => onPressedFn(),
+                  child: isSearchPressed
                       ? BottomNavigationBarButtonWidget(
                           icon: Icons.search,
                           btnColor: Color(0xFF967509),
@@ -77,15 +71,8 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                     overlayColor: MaterialStateColor.resolveWith(
                         (states) => Color(0xFF967509).withOpacity(0.1)),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      if (_isSearchPressed) {
-                        _isFavoritesPressed = true;
-                        _isSearchPressed = false;
-                      }
-                    });
-                  },
-                  child: _isFavoritesPressed
+                  onPressed: () => onPressedFn(),
+                  child: isFavoritesPressed
                       ? BottomNavigationBarButtonWidget(
                           imagePath: 'assets/images/favorite_orange_icon.png',
                           btnColor: Color(0xFF967509),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:book_finder_app/lang/languages.dart';
-import 'package:book_finder_app/models/models.dart';
+import 'package:book_finder_app/screens/screens.dart';
 import 'package:book_finder_app/services/services.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -15,29 +14,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _bookTitleController = TextEditingController();
-  List<Item> _foundBooks = [];
   bool hasBooks = false, isEnglish = true, isVisible = false;
   BookService bookService = BookService();
-  final FlutterLocalization _localization = FlutterLocalization.instance;
-
-  void _searchBooks() async {
-    String searchTerm = _bookTitleController.text;
-    if (searchTerm == "") {
-      _foundBooks = [];
-    } else {
-      _foundBooks = await bookService.getAllBooks(searchTerm);
-    }
-    setState(() => _foundBooks);
-  }
+  final FlutterLocalization localization = FlutterLocalization.instance;
+  int navBarIndex = 0;
+  bool isSearchPressed = true, isFavoritesPressed = false;
 
   void translate(bool value) {
     setState(() {
       isEnglish = value;
       if (isEnglish) {
-        _localization.translate('en');
+        localization.translate('en');
       } else {
-        _localization.translate('es', save: false);
+        localization.translate('es', save: false);
       }
     });
   }
@@ -48,6 +37,20 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.delayed(const Duration(milliseconds: 50), () {
       if (this.mounted) {
         setState(() => isVisible = true);
+      }
+    });
+  }
+
+  void controlNavBarButton() {
+    setState(() {
+      if (isFavoritesPressed) {
+        navBarIndex = 0;
+        isSearchPressed = true;
+        isFavoritesPressed = false;
+      } else if (isSearchPressed) {
+        navBarIndex = 1;
+        isFavoritesPressed = true;
+        isSearchPressed = false;
       }
     });
   }
@@ -112,49 +115,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 25.0),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: TextField(
-                        onChanged: (value) => _searchBooks(),
-                        controller: _bookTitleController,
-                        textCapitalization: TextCapitalization.sentences,
-                        style: TextStyle(
-                          color: Color(0xFF786C44),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                        ),
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Color(0xFF786C44).withOpacity(0.7),
-                            size: 28,
-                          ),
-                          hintText: AppLocale.hintText.getString(context),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                          ),
-                          hintStyle: TextStyle(
-                            color: Color(0xFF786C44).withOpacity(0.7),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
-                            borderSide: BorderSide.none,
-                          ),
-                          filled: true,
-                          fillColor: Color(0xFFFFFCF1),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 2.0, horizontal: 20.0),
-                        ),
+                    Expanded(
+                      child: IndexedStack(
+                        index: navBarIndex,
+                        children: [
+                          BookSearchWidget(),
+                          FavoritesScreen(),
+                        ],
                       ),
                     ),
-                    _foundBooks.isNotEmpty
-                        ? Container(
-                            height: MediaQuery.of(context).size.height - 370,
-                            child: BooksListWidget(bookItems: _foundBooks))
-                        : HomeDescriptionWidget(),
                   ],
                 ),
               ),
@@ -163,7 +132,11 @@ class _HomeScreenState extends State<HomeScreen> {
           floatingActionButton:
               SwitchLanguageWidget(translate: translate, isEnglish: isEnglish),
           floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-          bottomNavigationBar: BottomNavigationBarWidget(),
+          bottomNavigationBar: BottomNavigationBarWidget(
+            isSearchPressed: isSearchPressed,
+            isFavoritesPressed: isFavoritesPressed,
+            onPressedFn: controlNavBarButton,
+          ),
         ),
       ),
       onWillPop: () async {

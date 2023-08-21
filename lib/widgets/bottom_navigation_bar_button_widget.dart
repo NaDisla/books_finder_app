@@ -9,6 +9,7 @@ class BottomNavigationBarButtonWidget extends StatelessWidget {
   final bool isImageButtonSelected;
   final String? imagePath;
   final List<Shadow>? shadowList;
+
   const BottomNavigationBarButtonWidget({
     super.key,
     this.icon,
