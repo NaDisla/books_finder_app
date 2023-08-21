@@ -17,7 +17,7 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
   List<Item> foundBooks = [];
   BookService bookService = BookService();
 
-  void _searchBooks() async {
+  void searchBooks() async {
     String searchTerm = bookTitleController.text;
     if (searchTerm == "") {
       foundBooks = [];
@@ -34,7 +34,7 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextField(
-            onChanged: (value) => _searchBooks(),
+            onChanged: (value) => searchBooks(),
             controller: bookTitleController,
             textCapitalization: TextCapitalization.sentences,
             style: TextStyle(
