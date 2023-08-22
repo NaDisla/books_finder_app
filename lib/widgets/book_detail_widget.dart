@@ -12,6 +12,7 @@ class BookDetailWidget extends StatelessWidget {
   final String publishedDate;
   final String description;
   final String id;
+
   const BookDetailWidget({
     super.key,
     required this.volumeInfoTitle,

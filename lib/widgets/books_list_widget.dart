@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:book_finder_app/models/models.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';

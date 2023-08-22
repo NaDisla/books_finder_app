@@ -11,3 +11,4 @@ export 'bottom_navigation_bar_button_widget.dart';
 export 'book_button_info_widget.dart';
 export 'book_search_widget.dart';
 export 'bottom_navigation_bar_widget.dart';
+export 'favorites_books_widget.dart';

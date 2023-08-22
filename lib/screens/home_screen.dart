@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         index: navBarIndex,
                         children: [
                           BookSearchWidget(),
-                          FavoritesScreen(),
+                          FavoritesBooksWidget(),
                         ],
                       ),
                     ),
