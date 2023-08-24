@@ -16,6 +16,7 @@ mixin AppLocale {
   static const String bookUnknownPublishedDate = "Published date: Unknown";
   static const String btnSearch = "Search";
   static const String btnFavorites = "Favorites";
+  static const String addToFavorites = "Add to Favorites";
 
   static const Map<String, dynamic> EN = {
     alertEmptyTitleHeader: "Empty title",
@@ -33,6 +34,7 @@ mixin AppLocale {
     bookUnknownPublishedDate: "Published date: Unknown",
     btnSearch: "Search",
     btnFavorites: "Favorites",
+    addToFavorites: "Add to Favorites",
   };
   static const Map<String, dynamic> ES = {
     alertEmptyTitleHeader: "Título en blanco",
@@ -50,5 +52,6 @@ mixin AppLocale {
     bookUnknownPublishedDate: "Fecha de publicación: Desconocida",
     btnSearch: "Buscar",
     btnFavorites: "Favoritos",
+    addToFavorites: "Agregar a Favoritos",
   };
 }

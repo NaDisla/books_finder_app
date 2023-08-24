@@ -18,13 +18,13 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
   BookService bookService = BookService();
 
   void searchBooks() async {
-    String searchTerm = bookTitleController.text;
-    if (searchTerm == "") {
-      foundBooks = [];
-    } else {
-      foundBooks = await bookService.getAllBooks(searchTerm);
-    }
-    setState(() => foundBooks);
+    foundBooks = await bookService.getAllBooks(bookTitleController.text);
+    // if (bookTitleController.text.length > 0) {
+    //   foundBooks = await bookService.getAllBooks(bookTitleController.text);
+    // } else {
+    //   foundBooks = [];
+    // }
+    setState(() {});
   }
 
   @override
@@ -34,7 +34,13 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextField(
-            onChanged: (value) => searchBooks(),
+            onChanged: (text) {
+              if (text.length > 0) {
+                searchBooks();
+              } else {
+                setState(() => foundBooks = []);
+              }
+            },
             controller: bookTitleController,
             textCapitalization: TextCapitalization.sentences,
             style: TextStyle(

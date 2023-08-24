@@ -22,13 +22,15 @@ class BookDescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const BookDetailScreen(),
-          ),
-        );
+    return BookButtonInfoWidget(
+      icon: Icons.arrow_forward_ios_rounded,
+      text: AppLocale.bookDescription.getString(context),
+      onPressedFn: () {
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => const BookDetailScreen(),
+        //   ),
+        // );
         // showDialog(
         //     context: context,
         //     barrierDismissible: false,
@@ -73,10 +75,6 @@ class BookDescriptionWidget extends StatelessWidget {
         //       );
         //     });
       },
-      style: TextButton.styleFrom(padding: EdgeInsets.zero),
-      child: BookButtonInfoWidget(
-        text: AppLocale.bookDescription.getString(context),
-      ),
     );
   }
 }

@@ -1,10 +1,12 @@
+import 'package:book_finder_app/models/models.dart';
 import 'package:book_finder_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class BookImageWidget extends StatelessWidget {
-  final String thumbnail;
-  const BookImageWidget({super.key, required this.thumbnail});
+  final VolumeInfo book;
+  final String id;
+  const BookImageWidget({super.key, required this.book, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -13,18 +15,22 @@ class BookImageWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => BookDetailScreen(image: thumbnail),
+            builder: (context) => BookDetailScreen(
+              id: id,
+              book: book,
+            ),
           ),
         ),
         child: Hero(
-          tag: 'book-image',
+          tag: 'book-image-${id}',
           child: ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
             child: FadeInImage.memoryNetwork(
               placeholder: kTransparentImage,
-              image: thumbnail,
+              image: book.imageLinks!.thumbnail,
               fit: BoxFit.fill,
-              width: 180,
+              width: 180.0,
+              height: 250.0,
             ),
           ),
         ),

@@ -7,16 +7,17 @@ class VolumeInfo {
   String description;
   ImageLinks? imageLinks;
 
-  VolumeInfo(
-      {required this.title,
-      required this.authors,
-      required this.publishedDate,
-      required this.description,
-      required this.imageLinks});
+  VolumeInfo({
+    required this.title,
+    required this.authors,
+    required this.publishedDate,
+    required this.description,
+    required this.imageLinks,
+  });
 
   factory VolumeInfo.fromApiJson(Map<String, dynamic> json) {
     return VolumeInfo(
-      title: json['title']!,
+      title: json['title'] ?? '',
       authors: json['authors'] == null
           ? []
           : List<String>.from(json['authors'].map((x) => x)),
