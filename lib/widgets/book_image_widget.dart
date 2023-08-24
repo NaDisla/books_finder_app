@@ -13,14 +13,20 @@ class BookImageWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, right: 10.0, bottom: 10.0),
       child: GestureDetector(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => BookDetailScreen(
-              id: id,
-              book: book,
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => BookDetailScreen(
+                id: id,
+                book: book,
+              ),
             ),
-          ),
-        ),
+          );
+        },
         child: Hero(
           tag: 'book-image-${id}',
           child: ClipRRect(

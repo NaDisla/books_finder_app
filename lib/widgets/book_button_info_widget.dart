@@ -37,25 +37,5 @@ class BookButtonInfoWidget extends StatelessWidget {
       ),
       color: Colors.transparent,
     );
-    // return TextButton(
-    //   onPressed: () => onPressedFn,
-    //   style: TextButton.styleFrom(padding: EdgeInsets.zero),
-    //   child: Row(
-    //     children: [
-    //       Expanded(
-    //         child: Text(
-    //           text,
-    //           style: TextStyle(
-    //             fontWeight: FontWeight.bold,
-    //             fontSize: 16,
-    //             fontStyle: FontStyle.italic,
-    //             color: Utils.darkYellowColor,
-    //           ),
-    //         ),
-    //       ),
-    //       Icon(icon, color: Utils.darkYellowColor),
-    //     ],
-    //   ),
-    // );
   }
 }

@@ -3,15 +3,10 @@ import 'package:book_finder_app/models/models.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class BooksListWidget extends StatefulWidget {
+class BooksListWidget extends StatelessWidget {
   final List<Item> bookItems;
   const BooksListWidget({super.key, required this.bookItems});
 
-  @override
-  State<BooksListWidget> createState() => _BooksListWidgetState();
-}
-
-class _BooksListWidgetState extends State<BooksListWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,15 +16,15 @@ class _BooksListWidgetState extends State<BooksListWidget> {
       child: FadeInLeft(
         child: ListView.builder(
           padding: const EdgeInsets.all(0.0),
-          itemCount: widget.bookItems.length,
+          itemCount: bookItems.length,
           itemBuilder: ((context, index) {
             return Stack(
               children: [
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: BookImageWidget(
-                    id: widget.bookItems[index].id,
-                    book: widget.bookItems[index].volumeInfo,
+                    id: bookItems[index].id,
+                    book: bookItems[index].volumeInfo,
                   ),
                 ),
                 Positioned(
@@ -37,7 +32,7 @@ class _BooksListWidgetState extends State<BooksListWidget> {
                   left: 9.0,
                   bottom: 50.0,
                   child: SizedBox(
-                    height: 150.0,
+                    //height: 145.0,
                     width: 220.0,
                     child: Card(
                       color: Colors.white.withOpacity(0.8),
@@ -47,15 +42,13 @@ class _BooksListWidgetState extends State<BooksListWidget> {
                       child: Padding(
                         padding: const EdgeInsets.all(17.0),
                         child: BookDetailWidget(
-                          volumeInfoTitle:
-                              widget.bookItems[index].volumeInfo.title,
+                          volumeInfoTitle: bookItems[index].volumeInfo.title,
                           index: index,
-                          authors: widget.bookItems[index].volumeInfo.authors,
+                          authors: bookItems[index].volumeInfo.authors,
                           publishedDate:
-                              widget.bookItems[index].volumeInfo.publishedDate,
-                          description:
-                              widget.bookItems[index].volumeInfo.description,
-                          id: widget.bookItems[index].id,
+                              bookItems[index].volumeInfo.publishedDate,
+                          description: bookItems[index].volumeInfo.description,
+                          id: bookItems[index].id,
                         ),
                       ),
                     ),

@@ -17,6 +17,7 @@ mixin AppLocale {
   static const String btnSearch = "Search";
   static const String btnFavorites = "Favorites";
   static const String addToFavorites = "Add to Favorites";
+  static const String authorsConnector = "and";
 
   static const Map<String, dynamic> EN = {
     alertEmptyTitleHeader: "Empty title",
@@ -35,6 +36,7 @@ mixin AppLocale {
     btnSearch: "Search",
     btnFavorites: "Favorites",
     addToFavorites: "Add to Favorites",
+    authorsConnector: "and",
   };
   static const Map<String, dynamic> ES = {
     alertEmptyTitleHeader: "Título en blanco",
@@ -45,7 +47,7 @@ mixin AppLocale {
     hintText: "Buscar por título, autor o tema",
     homeDescription: "Tus resultados aparecerán aquí. ¡Empecemos a buscar! 🙂",
     bookMoreDetails: "Google Books info",
-    bookDescription: "Ver descripción completa",
+    bookDescription: "Ver descripción",
     bookAuthor: "Por: ",
     bookUnknownAuthor: "Desconocido",
     bookPublishedDate: "Fecha de publicación: ",
@@ -53,5 +55,6 @@ mixin AppLocale {
     btnSearch: "Buscar",
     btnFavorites: "Favoritos",
     addToFavorites: "Agregar a Favoritos",
+    authorsConnector: "y",
   };
 }

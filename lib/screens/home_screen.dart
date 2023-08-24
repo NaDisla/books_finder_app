@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:book_finder_app/screens/screens.dart';
+
 import 'package:book_finder_app/services/services.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool hasBooks = false, isEnglish = true, isVisible = false;
+  bool isEnglish = true, isVisible = false;
   BookService bookService = BookService();
   final FlutterLocalization localization = FlutterLocalization.instance;
   int navBarIndex = 0;
@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+      onWillPop: () async => false,
       child: GestureDetector(
         onTap: () {
           FocusScopeNode currentFocus = FocusScope.of(context);
@@ -139,14 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      onWillPop: () async {
-        if (hasBooks) {
-          setState(() => hasBooks = false);
-          return false;
-        } else {
-          return true;
-        }
-      },
     );
   }
 }

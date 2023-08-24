@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/models/models.dart';
 import 'package:book_finder_app/services/services.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:lottie/lottie.dart';
 
 class BookSearchWidget extends StatefulWidget {
   const BookSearchWidget({super.key});
@@ -13,18 +16,29 @@ class BookSearchWidget extends StatefulWidget {
 }
 
 class _BookSearchWidgetState extends State<BookSearchWidget> {
-  final TextEditingController bookTitleController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
   List<Item> foundBooks = [];
   BookService bookService = BookService();
+  Timer? debounce;
+  bool isLoading = false;
 
-  void searchBooks() async {
-    foundBooks = await bookService.getAllBooks(bookTitleController.text);
-    // if (bookTitleController.text.length > 0) {
-    //   foundBooks = await bookService.getAllBooks(bookTitleController.text);
-    // } else {
-    //   foundBooks = [];
-    // }
-    setState(() {});
+  void searchBooks(String query) async {
+    if (debounce?.isActive ?? false) debounce?.cancel();
+    if (query.isEmpty) {
+      setState(() {
+        foundBooks = [];
+        isLoading = false;
+      });
+      return;
+    }
+    debounce = Timer(const Duration(milliseconds: 400), () async {
+      setState(() => isLoading = true);
+      final response = await bookService.getAllBooks(query);
+      setState(() {
+        isLoading = false;
+        foundBooks = response;
+      });
+    });
   }
 
   @override
@@ -34,14 +48,8 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextField(
-            onChanged: (text) {
-              if (text.length > 0) {
-                searchBooks();
-              } else {
-                setState(() => foundBooks = []);
-              }
-            },
-            controller: bookTitleController,
+            onChanged: searchBooks,
+            controller: searchController,
             textCapitalization: TextCapitalization.sentences,
             style: TextStyle(
               color: Color(0xFF786C44),
@@ -74,12 +82,32 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
             ),
           ),
         ),
-        foundBooks.isNotEmpty
-            ? Container(
-                height: MediaQuery.of(context).size.height - 370,
-                child: BooksListWidget(bookItems: foundBooks))
-            : HomeDescriptionWidget(),
+        isLoading
+            ? AlertDialog(
+                backgroundColor: Colors.white,
+                title: Text(AppLocale.alertSearchingBook.getString(context)),
+                content: Lottie.asset(
+                  'assets/book-search.json',
+                  width: 100.0,
+                  height: 100.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+              )
+            : foundBooks.isNotEmpty
+                ? Container(
+                    height: MediaQuery.of(context).size.height - 370,
+                    child: BooksListWidget(bookItems: foundBooks))
+                : HomeDescriptionWidget(),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    debounce?.cancel();
+    super.dispose();
   }
 }
