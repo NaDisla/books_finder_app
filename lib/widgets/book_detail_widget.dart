@@ -1,26 +1,20 @@
 import 'package:book_finder_app/core/utils.dart';
 import 'package:book_finder_app/lang/languages.dart';
-import 'package:book_finder_app/services/services.dart';
+import 'package:book_finder_app/models/models.dart';
+import 'package:book_finder_app/screens/book_detail_screen.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class BookDetailWidget extends StatelessWidget {
-  final String volumeInfoTitle;
+  final VolumeInfo book;
   final int index;
-  final List<String> authors;
-  final String publishedDate;
-  final String description;
   final String id;
 
   const BookDetailWidget({
     super.key,
-    required this.volumeInfoTitle,
+    required this.book,
     required this.index,
-    required this.authors,
-    required this.publishedDate,
-    required this.description,
     required this.id,
   });
 
@@ -31,7 +25,7 @@ class BookDetailWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          volumeInfoTitle,
+          book.title,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
@@ -39,11 +33,11 @@ class BookDetailWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 5.0),
-        AuthorsListWidget(currentAuthors: authors),
+        AuthorsListWidget(currentAuthors: book.authors),
         SizedBox(height: 5.0),
-        publishedDate != ''
+        book.publishedDate != ''
             ? Text(
-                publishedDate,
+                book.publishedDate,
                 style: Utils.authorDateStyle,
               )
             : Text(
@@ -51,24 +45,20 @@ class BookDetailWidget extends StatelessWidget {
                 style: Utils.authorDateStyle,
               ),
         SizedBox(height: 5.0),
-        description != ''
+        book.description != ''
             ? BookButtonInfoWidget(
                 text: AppLocale.bookDescription.getString(context),
-                onPressedFn: () {},
+                onPressedFn: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BookDetailScreen(book: book, id: id),
+                  ),
+                ),
                 icon: Icons.arrow_forward_ios_rounded,
               )
             : BookButtonInfoWidget(
                 text: AppLocale.bookMoreDetails.getString(context),
                 icon: Icons.arrow_forward_ios_rounded,
-                onPressedFn: () {
-                  Uri bookUrl = Uri.parse(
-                    BookService.getBookUrl(id, volumeInfoTitle),
-                  );
-                  launchUrlString(
-                    bookUrl.toString(),
-                    mode: LaunchMode.externalApplication,
-                  );
-                },
+                onPressedFn: () => Utils.getGoogleBooksInfo(id, book.title),
               ),
       ],
     );

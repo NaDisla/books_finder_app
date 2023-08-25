@@ -42,12 +42,8 @@ class BooksListWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(17.0),
                         child: BookDetailWidget(
-                          volumeInfoTitle: bookItems[index].volumeInfo.title,
+                          book: bookItems[index].volumeInfo,
                           index: index,
-                          authors: bookItems[index].volumeInfo.authors,
-                          publishedDate:
-                              bookItems[index].volumeInfo.publishedDate,
-                          description: bookItems[index].volumeInfo.description,
                           id: bookItems[index].id,
                         ),
                       ),

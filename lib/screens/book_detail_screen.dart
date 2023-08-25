@@ -9,16 +9,11 @@ import 'package:transparent_image/transparent_image.dart';
 
 class BookDetailScreen extends StatelessWidget {
   final VolumeInfo book;
-  final String? id;
-  const BookDetailScreen({super.key, required this.book, this.id});
+  final String id;
+  const BookDetailScreen({super.key, required this.book, required this.id});
 
   @override
   Widget build(BuildContext context) {
-    TextStyle dateTextStyle = TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-      color: Color(0xFF6A6A6A),
-    );
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -128,12 +123,12 @@ class BookDetailScreen extends StatelessWidget {
                         book.publishedDate != ''
                             ? Text(
                                 book.publishedDate,
-                                style: dateTextStyle,
+                                style: Utils.authorDateStyle,
                               )
                             : Text(
                                 AppLocale.bookUnknownPublishedDate
                                     .getString(context),
-                                style: dateTextStyle,
+                                style: Utils.authorDateStyle,
                               ),
                         SizedBox(height: 10.0),
                         BookButtonInfoWidget(
@@ -144,7 +139,8 @@ class BookDetailScreen extends StatelessWidget {
                         SizedBox(height: 10.0),
                         BookButtonInfoWidget(
                           text: "Google Books info",
-                          onPressedFn: () => print('Google Books info'),
+                          onPressedFn: () =>
+                              Utils.getGoogleBooksInfo(id, book.title),
                           icon: Icons.arrow_forward_ios_rounded,
                         ),
                         SizedBox(height: 10.0),
