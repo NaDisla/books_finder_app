@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:book_finder_app/services/services.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
@@ -69,65 +68,54 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           extendBody: true,
           resizeToAvoidBottomInset: false,
-          body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/background.webp'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-              child: Container(
-                color: const Color(0xFF8D8364).withOpacity(0.5),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 55,
-                    ),
-                    SizedBox(
-                      height: 120,
-                      child: OverflowBox(
-                        minHeight: 170,
-                        maxHeight: 220,
-                        child: Visibility(
-                          visible: isVisible,
-                          child: Lottie.asset(
-                            'assets/icon-home.json',
-                            width: 210.0,
-                            height: 210.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'BooksFinder',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontStyle: FontStyle.normal,
-                        shadows: <Shadow>[
-                          Shadow(
-                              color: Colors.black,
-                              blurRadius: 4.0,
-                              offset: Offset(0, 4))
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 25.0),
-                    Expanded(
-                      child: IndexedStack(
-                        index: navBarIndex,
-                        children: [
-                          BookSearchWidget(),
-                          FavoritesBooksWidget(),
-                        ],
-                      ),
-                    ),
-                  ],
+          body: BackgroundWidget(
+            color: Color(0xFF8D8364).withOpacity(0.5),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 55,
                 ),
-              ),
+                SizedBox(
+                  height: 120,
+                  child: OverflowBox(
+                    minHeight: 170,
+                    maxHeight: 220,
+                    child: Visibility(
+                      visible: isVisible,
+                      child: Lottie.asset(
+                        'assets/icon-home.json',
+                        width: 210.0,
+                        height: 210.0,
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  'BooksFinder',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontStyle: FontStyle.normal,
+                    shadows: <Shadow>[
+                      Shadow(
+                          color: Colors.black,
+                          blurRadius: 4.0,
+                          offset: Offset(0, 4))
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 25.0),
+                Expanded(
+                  child: IndexedStack(
+                    index: navBarIndex,
+                    children: [
+                      BookSearchWidget(),
+                      FavoritesBooksWidget(),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           floatingActionButton:
