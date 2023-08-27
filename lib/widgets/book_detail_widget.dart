@@ -54,11 +54,13 @@ class BookDetailWidget extends StatelessWidget {
                   ),
                 ),
                 icon: Icons.arrow_forward_ios_rounded,
+                btnColor: Utils.darkYellowColor,
               )
             : BookButtonInfoWidget(
                 text: AppLocale.bookMoreDetails.getString(context),
                 icon: Icons.arrow_forward_ios_rounded,
                 onPressedFn: () => Utils.getGoogleBooksInfo(id, book.title),
+                btnColor: Utils.darkYellowColor,
               ),
       ],
     );

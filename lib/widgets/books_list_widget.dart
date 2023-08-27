@@ -32,7 +32,6 @@ class BooksListWidget extends StatelessWidget {
                   left: 9.0,
                   bottom: 50.0,
                   child: SizedBox(
-                    //height: 145.0,
                     width: 220.0,
                     child: Card(
                       color: Colors.white.withOpacity(0.8),

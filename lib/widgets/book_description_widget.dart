@@ -1,10 +1,8 @@
+import 'package:book_finder_app/core/utils.dart';
 import 'package:book_finder_app/lang/languages.dart';
-import 'package:book_finder_app/screens/screens.dart';
-import 'package:book_finder_app/services/services.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class BookDescriptionWidget extends StatelessWidget {
   final String bookTitle;
@@ -25,6 +23,7 @@ class BookDescriptionWidget extends StatelessWidget {
     return BookButtonInfoWidget(
       icon: Icons.arrow_forward_ios_rounded,
       text: AppLocale.bookDescription.getString(context),
+      btnColor: Utils.darkYellowColor,
       onPressedFn: () {
         // Navigator.of(context).push(
         //   MaterialPageRoute(

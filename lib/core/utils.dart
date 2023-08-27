@@ -9,6 +9,7 @@ class Utils {
     color: Color(0xFF6A6A6A),
   );
   static Color darkYellowColor = Color(0xFF786C44);
+  static Color darkRedColor = Color(0xFF8B1E1E);
   static void getGoogleBooksInfo(String id, String volumeInfoTitle) {
     Uri bookUrl = Uri.parse(
       BookService.getBookUrl(id, volumeInfoTitle),

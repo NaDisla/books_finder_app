@@ -17,7 +17,9 @@ mixin AppLocale {
   static const String btnSearch = "Search";
   static const String btnFavorites = "Favorites";
   static const String addToFavorites = "Add to Favorites";
+  static const String removeFavorite = "Remove favorite";
   static const String authorsConnector = "and";
+  static const String aboutBook = "About the book";
 
   static const Map<String, dynamic> EN = {
     alertEmptyTitleHeader: "Empty title",
@@ -36,7 +38,9 @@ mixin AppLocale {
     btnSearch: "Search",
     btnFavorites: "Favorites",
     addToFavorites: "Add to Favorites",
+    removeFavorite: "Remove favorite",
     authorsConnector: "and",
+    aboutBook: "About the book",
   };
   static const Map<String, dynamic> ES = {
     alertEmptyTitleHeader: "Título en blanco",
@@ -55,6 +59,8 @@ mixin AppLocale {
     btnSearch: "Buscar",
     btnFavorites: "Favoritos",
     addToFavorites: "Agregar a Favoritos",
+    removeFavorite: "Eliminar favorito",
     authorsConnector: "y",
+    aboutBook: "Sobre el libro",
   };
 }
