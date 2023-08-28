@@ -119,8 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          floatingActionButton:
-              SwitchLanguageWidget(translate: translate, isEnglish: isEnglish),
+          floatingActionButton: SwitchLanguageWidget(translate: translate, isEnglish: isEnglish),
           floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
           bottomNavigationBar: BottomNavigationBarWidget(
             isSearchPressed: isSearchPressed,

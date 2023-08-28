@@ -1,55 +1,43 @@
 mixin AppLocale {
-  static const String alertEmptyTitleHeader = "Empty title";
-  static const String alertEmptyTitleDesc = "Please, provide the book title.";
   static const String alertSearchingBook = "Searching book...";
   static const String alertSearchErrorHeader = "An error occurred";
-  static const String alertSearchErrorDesc =
-      "An error occurred searching the book 😥: ";
+  static const String alertSearchErrorDesc = "An error occurred searching the book 😥: ";
   static const String hintText = "Search by title, author or topic";
-  static const String homeEmptyResults =
-      "Your results will appear here. Let's start searching! 🙂";
+  static const String homeEmptyResults = "Your results will appear here. Let's start searching! 🙂";
   static const String bookMoreDetails = "Google Books info";
   static const String bookDescription = "See full description";
   static const String bookAuthor = "By: ";
-  static const String bookUnknownAuthor = "Unknown";
-  static const String bookPublishedDate = "Published date: ";
-  static const String bookUnknownPublishedDate = "Published date: Unknown";
+  static const String bookUnknownAuthor = "Unknown.";
+  static const String bookUnknownPublishedDate = "Published date: Unknown.";
   static const String btnSearch = "Search";
   static const String btnFavorites = "Favorites";
   static const String addToFavorites = "Add to Favorites";
   static const String removeFavorite = "Remove favorite";
   static const String authorsConnector = "and";
   static const String aboutBook = "About the book";
-  static const String favoritesEmptyResults =
-      "You don't have any favorite book. Let's start adding it! 🙂";
+  static const String favoritesEmptyResults = "You don't have any favorite book. Let's start adding it! 🙂";
 
   static const Map<String, dynamic> EN = {
-    alertEmptyTitleHeader: "Empty title",
-    alertEmptyTitleDesc: "Please, provide the book title.",
     alertSearchingBook: "Searching book...",
     alertSearchErrorHeader: "An error occurred",
     alertSearchErrorDesc: "An error occurred searching the book 😥: ",
     hintText: "Search by title, author or topic",
-    homeEmptyResults:
-        "Your results will appear here. Let's start searching! 🙂",
+    homeEmptyResults: "Your results will appear here. Let's start searching! 🙂",
     bookMoreDetails: "Google Books info",
     bookDescription: "See full description",
     bookAuthor: "By: ",
-    bookUnknownAuthor: "Unknown",
-    bookPublishedDate: "Published date: ",
-    bookUnknownPublishedDate: "Published date: Unknown",
+    bookUnknownAuthor: "Unknown.",
+    bookUnknownPublishedDate: "Published date: Unknown.",
     btnSearch: "Search",
     btnFavorites: "Favorites",
     addToFavorites: "Add to Favorites",
     removeFavorite: "Remove favorite",
     authorsConnector: "and",
     aboutBook: "About the book",
-    favoritesEmptyResults:
-        "You don't have any favorite book yet. Let's back to search and add some! 🙂"
+    favoritesEmptyResults: "You don't have any favorite book yet. Let's back to search and add some! 🙂"
   };
+
   static const Map<String, dynamic> ES = {
-    alertEmptyTitleHeader: "Título en blanco",
-    alertEmptyTitleDesc: "Por favor, indique el título del libro.",
     alertSearchingBook: "Buscando libro...",
     alertSearchErrorHeader: "Ha ocurrido un error",
     alertSearchErrorDesc: "Ha ocurrido un error buscando el libro 😥: ",
@@ -58,16 +46,14 @@ mixin AppLocale {
     bookMoreDetails: "Google Books info",
     bookDescription: "Ver descripción",
     bookAuthor: "Por: ",
-    bookUnknownAuthor: "Desconocido",
-    bookPublishedDate: "Fecha de publicación: ",
-    bookUnknownPublishedDate: "Fecha de publicación: Desconocida",
+    bookUnknownAuthor: "Desconocido.",
+    bookUnknownPublishedDate: "Fecha de publicación: Desconocida.",
     btnSearch: "Buscar",
     btnFavorites: "Favoritos",
     addToFavorites: "Agregar a Favoritos",
     removeFavorite: "Eliminar favorito",
     authorsConnector: "y",
     aboutBook: "Sobre el libro",
-    favoritesEmptyResults:
-        "Todavía no tienes ningún libro favorito. ¡Volvamos a buscar y agregar algunos! 🙂"
+    favoritesEmptyResults: "Todavía no tienes ningún libro favorito. ¡Volvamos a buscar y agregar algunos! 🙂"
   };
 }

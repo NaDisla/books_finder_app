@@ -41,23 +41,16 @@ class BookDetailWidget extends StatelessWidget {
                 style: Utils.authorDateStyle,
               ),
         SizedBox(height: 5.0),
-        book.volumeInfo.description != ''
-            ? BookButtonInfoWidget(
-                text: AppLocale.bookDescription.getString(context),
-                onPressedFn: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => BookDetailScreen(book: book),
-                  ),
-                ),
-                icon: Icons.arrow_forward_ios_rounded,
-                btnColor: Utils.darkYellowColor,
-              )
-            : BookButtonInfoWidget(
-                text: AppLocale.bookMoreDetails.getString(context),
-                icon: Icons.arrow_forward_ios_rounded,
-                onPressedFn: () => Utils.getGoogleBooksInfo(book.id, book.volumeInfo.title),
-                btnColor: Utils.darkYellowColor,
-              ),
+        BookButtonInfoWidget(
+          text: AppLocale.bookDescription.getString(context),
+          onPressedFn: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => BookDetailScreen(book: book),
+            ),
+          ),
+          icon: Icons.arrow_forward_ios_rounded,
+          btnColor: Utils.darkYellowColor,
+        ),
       ],
     );
   }
