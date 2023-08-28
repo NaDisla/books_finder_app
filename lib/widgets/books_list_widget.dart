@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 
 class BooksListWidget extends StatelessWidget {
   final List<Item> bookItems;
-  const BooksListWidget({super.key, required this.bookItems});
+
+  const BooksListWidget({
+    super.key,
+    required this.bookItems,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +27,7 @@ class BooksListWidget extends StatelessWidget {
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: BookImageWidget(
-                    id: bookItems[index].id,
-                    book: bookItems[index].volumeInfo,
+                    book: bookItems[index],
                   ),
                 ),
                 Positioned(
@@ -41,9 +44,7 @@ class BooksListWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(17.0),
                         child: BookDetailWidget(
-                          book: bookItems[index].volumeInfo,
-                          index: index,
-                          id: bookItems[index].id,
+                          book: bookItems[index],
                         ),
                       ),
                     ),

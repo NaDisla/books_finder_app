@@ -7,15 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
 class BookDetailWidget extends StatelessWidget {
-  final VolumeInfo book;
-  final int index;
-  final String id;
+  final Item book;
 
   const BookDetailWidget({
     super.key,
     required this.book,
-    required this.index,
-    required this.id,
   });
 
   @override
@@ -25,7 +21,7 @@ class BookDetailWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          book.title,
+          book.volumeInfo.title,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
@@ -33,11 +29,11 @@ class BookDetailWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 5.0),
-        AuthorsListWidget(currentAuthors: book.authors),
+        AuthorsListWidget(currentAuthors: book.volumeInfo.authors),
         SizedBox(height: 5.0),
-        book.publishedDate != ''
+        book.volumeInfo.publishedDate != ''
             ? Text(
-                book.publishedDate,
+                book.volumeInfo.publishedDate,
                 style: Utils.authorDateStyle,
               )
             : Text(
@@ -45,12 +41,12 @@ class BookDetailWidget extends StatelessWidget {
                 style: Utils.authorDateStyle,
               ),
         SizedBox(height: 5.0),
-        book.description != ''
+        book.volumeInfo.description != ''
             ? BookButtonInfoWidget(
                 text: AppLocale.bookDescription.getString(context),
                 onPressedFn: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => BookDetailScreen(book: book, id: id),
+                    builder: (context) => BookDetailScreen(book: book),
                   ),
                 ),
                 icon: Icons.arrow_forward_ios_rounded,
@@ -59,7 +55,8 @@ class BookDetailWidget extends StatelessWidget {
             : BookButtonInfoWidget(
                 text: AppLocale.bookMoreDetails.getString(context),
                 icon: Icons.arrow_forward_ios_rounded,
-                onPressedFn: () => Utils.getGoogleBooksInfo(id, book.title),
+                onPressedFn: () =>
+                    Utils.getGoogleBooksInfo(book.id, book.volumeInfo.title),
                 btnColor: Utils.darkYellowColor,
               ),
       ],

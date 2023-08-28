@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:book_finder_app/screens/screens.dart';
 import 'package:book_finder_app/services/services.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final FlutterLocalization localization = FlutterLocalization.instance;
   int navBarIndex = 0;
   bool isSearchPressed = true, isFavoritesPressed = false;
+  final number = BookDetailScreenState.favMethod;
 
   void translate(bool value) {
     setState(() {
@@ -111,7 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     index: navBarIndex,
                     children: [
                       BookSearchWidget(),
-                      FavoritesBooksWidget(),
+                      FavoritesBooksWidget(
+                          //number: number,
+                          ),
                     ],
                   ),
                 ),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:book_finder_app/core/utils.dart';
 import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/models/models.dart';
@@ -9,28 +11,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class BookDetailScreen extends StatefulWidget {
-  final VolumeInfo book;
-  final String id;
+  final Item book;
 
   const BookDetailScreen({
     super.key,
     required this.book,
-    required this.id,
   });
 
   @override
-  State<BookDetailScreen> createState() => _BookDetailScreenState();
+  State<BookDetailScreen> createState() => BookDetailScreenState();
 }
 
-class _BookDetailScreenState extends State<BookDetailScreen> {
+class BookDetailScreenState extends State<BookDetailScreen> {
   bool isFavorite = false;
-  List<String> favoritesBooks = [];
+  List<String> savedFavBooks = [];
+  static final favMethod = new ValueNotifier(() {});
 
-  Future<void> getFavoritesBooks() async {
-    final SharedPreferences localPrefs = await SharedPreferences.getInstance();
-    favoritesBooks = localPrefs.getStringList("favoritesBooks") ?? [];
-    setState(() => isFavorite = favoritesBooks.contains(widget.book.title));
-    print(favoritesBooks);
+  void getFavoritesBooks() async {
+    savedFavBooks = await Utils.getFavoritesBooks();
+    List<Item> savedFavBooksParsed =
+        savedFavBooks.map((map) => Item.fromApiItems(jsonDecode(map))).toList();
+    setState(() => isFavorite =
+        savedFavBooksParsed.any((book) => book.id == widget.book.id));
   }
 
   @override
@@ -89,12 +91,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
               Row(
                 children: [
                   Hero(
-                    tag: 'book-image-${widget.id}',
+                    tag: widget.book,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5.0),
                       child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
-                        image: widget.book.imageLinks!.thumbnail,
+                        image: widget.book.volumeInfo.imageLinks!.thumbnail,
                         fit: BoxFit.fill,
                         width: 180.0,
                         height: 250.0,
@@ -109,7 +111,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         Stack(
                           children: [
                             Text(
-                              widget.book.title,
+                              widget.book.volumeInfo.title,
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
@@ -118,7 +120,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 fontSize: 30.0,
                               ),
                             ),
-                            if (widget.book.title.length > 26)
+                            if (widget.book.volumeInfo.title.length > 26)
                               Positioned(
                                 top: 52,
                                 bottom: 0,
@@ -129,7 +131,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                       context: context,
                                       builder: ((context) => AlertDialog(
                                             title: Text(
-                                              widget.book.title,
+                                              widget.book.volumeInfo.title,
                                               textAlign: TextAlign.center,
                                             ),
                                           )),
@@ -146,11 +148,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           ],
                         ),
                         SizedBox(height: 10.0),
-                        AuthorsListWidget(currentAuthors: widget.book.authors),
+                        AuthorsListWidget(
+                            currentAuthors: widget.book.volumeInfo.authors),
                         SizedBox(height: 10.0),
-                        widget.book.publishedDate != ''
+                        widget.book.volumeInfo.publishedDate != ''
                             ? Text(
-                                widget.book.publishedDate,
+                                widget.book.volumeInfo.publishedDate,
                                 style: Utils.authorDateStyle,
                               )
                             : Text(
@@ -164,12 +167,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 text:
                                     AppLocale.removeFavorite.getString(context),
                                 onPressedFn: () async {
-                                  setState(() => isFavorite = false);
                                   final prefs =
                                       await SharedPreferences.getInstance();
-                                  favoritesBooks.remove(widget.book.title);
+                                  var bookMap = Item.toMap(widget.book);
+                                  var jsonBook = jsonEncode(bookMap);
+                                  savedFavBooks.remove(jsonBook);
                                   await prefs.setStringList(
-                                      "favoritesBooks", favoritesBooks);
+                                      "favoritesBooks", savedFavBooks);
+                                  setState(() => isFavorite = false);
                                 },
                                 icon: Icons.remove_circle_sharp,
                                 btnColor: Utils.darkRedColor,
@@ -178,14 +183,15 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 text:
                                     AppLocale.addToFavorites.getString(context),
                                 onPressedFn: () async {
-                                  setState(() => isFavorite = true);
                                   final prefs =
                                       await SharedPreferences.getInstance();
-                                  List<String> favoritesBooks =
-                                      prefs.getStringList("favoritesBooks")!;
-                                  favoritesBooks.add(widget.book.title);
+                                  var bookMap = Item.toMap(widget.book);
+                                  var jsonBook = jsonEncode(bookMap);
+                                  savedFavBooks.add(jsonBook);
                                   await prefs.setStringList(
-                                      "favoritesBooks", favoritesBooks);
+                                      "favoritesBooks", savedFavBooks);
+                                  setState(() => isFavorite = true);
+                                  //favMethod.value = ;
                                 },
                                 icon: Icons.add_circle_sharp,
                                 btnColor: Utils.darkYellowColor,
@@ -194,7 +200,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         BookButtonInfoWidget(
                           text: "Google Books info",
                           onPressedFn: () => Utils.getGoogleBooksInfo(
-                              widget.id, widget.book.title),
+                              widget.book.id, widget.book.volumeInfo.title),
                           icon: Icons.arrow_forward_ios_rounded,
                           btnColor: Utils.darkYellowColor,
                         ),
@@ -222,7 +228,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   radius: Radius.circular(5.0),
                   child: SingleChildScrollView(
                     child: Text(
-                      widget.book.description,
+                      widget.book.volumeInfo.description,
                       textAlign: TextAlign.justify,
                       style: TextStyle(
                         fontSize: 18.0,

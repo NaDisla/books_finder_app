@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class BookImageWidget extends StatelessWidget {
-  final VolumeInfo book;
-  final String id;
-  const BookImageWidget({super.key, required this.book, required this.id});
+  final Item book;
+
+  const BookImageWidget({
+    super.key,
+    required this.book,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +24,18 @@ class BookImageWidget extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => BookDetailScreen(
-                id: id,
                 book: book,
               ),
             ),
           );
         },
         child: Hero(
-          tag: 'book-image-${id}',
+          tag: book,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
             child: FadeInImage.memoryNetwork(
               placeholder: kTransparentImage,
-              image: book.imageLinks!.thumbnail,
+              image: book.volumeInfo.imageLinks!.thumbnail,
               fit: BoxFit.fill,
               width: 180.0,
               height: 250.0,

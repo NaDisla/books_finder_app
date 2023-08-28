@@ -1,7 +1,6 @@
 export 'authors_list_widget.dart';
 export 'background_widget.dart';
 export 'book_button_info_widget.dart';
-export 'book_description_widget.dart';
 export 'book_detail_widget.dart';
 export 'book_image_widget.dart';
 export 'book_search_widget.dart';

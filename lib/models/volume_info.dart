@@ -30,4 +30,14 @@ class VolumeInfo {
           }),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'authors': authors,
+      'publishedDate': publishedDate,
+      'description': description,
+      'imageLinks': imageLinks!.toJson(),
+    };
+  }
 }

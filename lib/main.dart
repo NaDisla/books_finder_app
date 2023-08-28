@@ -5,7 +5,6 @@ import 'package:book_finder_app/screens/screens.dart';
 import 'package:book_finder_app/services/custom_http_overrides.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   HttpOverrides.global = CustomHttpOverrides();
@@ -21,14 +20,6 @@ class BookFinderApp extends StatefulWidget {
 
 class _BookFinderAppState extends State<BookFinderApp> {
   final FlutterLocalization _localization = FlutterLocalization.instance;
-  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
-  List<String> favoritesBooks = [];
-
-  Future<void> getFavoritesBooks() async {
-    final SharedPreferences localPrefs = await prefs;
-    favoritesBooks = localPrefs.getStringList("favoritesBooks") ?? [];
-    print(favoritesBooks);
-  }
 
   @override
   void initState() {
@@ -40,7 +31,6 @@ class _BookFinderAppState extends State<BookFinderApp> {
       initLanguageCode: 'en',
     );
     _localization.onTranslatedLanguage = _onTranslatedLanguage;
-    getFavoritesBooks();
     super.initState();
   }
 
