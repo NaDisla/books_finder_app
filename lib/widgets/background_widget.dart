@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class BackgroundWidget extends StatelessWidget {
   final Widget child;
   final Color color;
+
   const BackgroundWidget({
     super.key,
     required this.child,

@@ -77,29 +77,32 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
               ),
               filled: true,
               fillColor: Color(0xFFFFFCF1),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 2.0, horizontal: 20.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 20.0),
             ),
           ),
         ),
-        isLoading
-            ? AlertDialog(
-                backgroundColor: Colors.white,
-                title: Text(AppLocale.alertSearchingBook.getString(context)),
-                content: Lottie.asset(
-                  'assets/book-search.json',
-                  width: 100.0,
-                  height: 100.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-              )
-            : foundBooks.isNotEmpty
-                ? Container(
-                    height: MediaQuery.of(context).size.height - 370,
-                    child: BooksListWidget(bookItems: foundBooks))
-                : HomeDescriptionWidget(),
+        if (isLoading)
+          AlertDialog(
+            backgroundColor: Colors.white,
+            title: Text(AppLocale.alertSearchingBook.getString(context)),
+            content: Lottie.asset(
+              'assets/book-search.json',
+              width: 100.0,
+              height: 100.0,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            ),
+          )
+        else if (foundBooks.isNotEmpty)
+          Container(
+            height: MediaQuery.of(context).size.height - 370,
+            child: BooksListWidget(bookItems: foundBooks),
+          )
+        else
+          EmptyResultsWidget(
+            message: AppLocale.homeEmptyResults.getString(context),
+          )
       ],
     );
   }

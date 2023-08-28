@@ -5,6 +5,7 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 class AuthorsListWidget extends StatelessWidget {
   final List<String> currentAuthors;
+
   const AuthorsListWidget({super.key, required this.currentAuthors});
 
   @override
@@ -15,8 +16,7 @@ class AuthorsListWidget extends StatelessWidget {
       for (int idx = 0; idx < totalAuthors; idx++) {
         String author = currentAuthors[idx];
         if (idx == totalAuthors - 1) {
-          finalAuthors +=
-              "${AppLocale.authorsConnector.getString(context)} $author.";
+          finalAuthors += "${AppLocale.authorsConnector.getString(context)} $author.";
         } else if (1 == totalAuthors - 1) {
           finalAuthors += "$author ";
         } else {
@@ -37,8 +37,7 @@ class AuthorsListWidget extends StatelessWidget {
         style: Utils.authorDateStyle,
       );
     } else {
-      return Text(AppLocale.bookUnknownAuthor.getString(context),
-          style: Utils.authorDateStyle);
+      return Text(AppLocale.bookUnknownAuthor.getString(context), style: Utils.authorDateStyle);
     }
   }
 }

@@ -7,7 +7,6 @@ import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class BookDetailScreen extends StatefulWidget {
@@ -19,20 +18,17 @@ class BookDetailScreen extends StatefulWidget {
   });
 
   @override
-  State<BookDetailScreen> createState() => BookDetailScreenState();
+  State<BookDetailScreen> createState() => _BookDetailScreenState();
 }
 
-class BookDetailScreenState extends State<BookDetailScreen> {
+class _BookDetailScreenState extends State<BookDetailScreen> {
   bool isFavorite = false;
   List<String> savedFavBooks = [];
-  static final favMethod = new ValueNotifier(() {});
 
   void getFavoritesBooks() async {
     savedFavBooks = await Utils.getFavoritesBooks();
-    List<Item> savedFavBooksParsed =
-        savedFavBooks.map((map) => Item.fromApiItems(jsonDecode(map))).toList();
-    setState(() => isFavorite =
-        savedFavBooksParsed.any((book) => book.id == widget.book.id));
+    List<Item> savedFavBooksParsed = savedFavBooks.map((map) => Item.fromApiItems(jsonDecode(map))).toList();
+    setState(() => isFavorite = savedFavBooksParsed.any((book) => book.id == widget.book.id));
   }
 
   @override
@@ -47,7 +43,7 @@ class BookDetailScreenState extends State<BookDetailScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: TextButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context),
           child: Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.black,
@@ -148,8 +144,7 @@ class BookDetailScreenState extends State<BookDetailScreen> {
                           ],
                         ),
                         SizedBox(height: 10.0),
-                        AuthorsListWidget(
-                            currentAuthors: widget.book.volumeInfo.authors),
+                        AuthorsListWidget(currentAuthors: widget.book.volumeInfo.authors),
                         SizedBox(height: 10.0),
                         widget.book.volumeInfo.publishedDate != ''
                             ? Text(
@@ -157,41 +152,25 @@ class BookDetailScreenState extends State<BookDetailScreen> {
                                 style: Utils.authorDateStyle,
                               )
                             : Text(
-                                AppLocale.bookUnknownPublishedDate
-                                    .getString(context),
+                                AppLocale.bookUnknownPublishedDate.getString(context),
                                 style: Utils.authorDateStyle,
                               ),
                         SizedBox(height: 10.0),
                         isFavorite
                             ? BookButtonInfoWidget(
-                                text:
-                                    AppLocale.removeFavorite.getString(context),
+                                text: AppLocale.removeFavorite.getString(context),
                                 onPressedFn: () async {
-                                  final prefs =
-                                      await SharedPreferences.getInstance();
-                                  var bookMap = Item.toMap(widget.book);
-                                  var jsonBook = jsonEncode(bookMap);
-                                  savedFavBooks.remove(jsonBook);
-                                  await prefs.setStringList(
-                                      "favoritesBooks", savedFavBooks);
+                                  Utils.setFavoritesBooks(savedFavBooks, widget.book, "remove");
                                   setState(() => isFavorite = false);
                                 },
                                 icon: Icons.remove_circle_sharp,
                                 btnColor: Utils.darkRedColor,
                               )
                             : BookButtonInfoWidget(
-                                text:
-                                    AppLocale.addToFavorites.getString(context),
+                                text: AppLocale.addToFavorites.getString(context),
                                 onPressedFn: () async {
-                                  final prefs =
-                                      await SharedPreferences.getInstance();
-                                  var bookMap = Item.toMap(widget.book);
-                                  var jsonBook = jsonEncode(bookMap);
-                                  savedFavBooks.add(jsonBook);
-                                  await prefs.setStringList(
-                                      "favoritesBooks", savedFavBooks);
+                                  Utils.setFavoritesBooks(savedFavBooks, widget.book, "add");
                                   setState(() => isFavorite = true);
-                                  //favMethod.value = ;
                                 },
                                 icon: Icons.add_circle_sharp,
                                 btnColor: Utils.darkYellowColor,
@@ -199,8 +178,7 @@ class BookDetailScreenState extends State<BookDetailScreen> {
                         SizedBox(height: 10.0),
                         BookButtonInfoWidget(
                           text: "Google Books info",
-                          onPressedFn: () => Utils.getGoogleBooksInfo(
-                              widget.book.id, widget.book.volumeInfo.title),
+                          onPressedFn: () => Utils.getGoogleBooksInfo(widget.book.id, widget.book.volumeInfo.title),
                           icon: Icons.arrow_forward_ios_rounded,
                           btnColor: Utils.darkYellowColor,
                         ),

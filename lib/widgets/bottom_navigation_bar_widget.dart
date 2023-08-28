@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +45,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
               children: [
                 TextButton(
                   style: ButtonStyle(
-                    overlayColor: MaterialStateColor.resolveWith(
-                        (states) => Color(0xFF967509).withOpacity(0.1)),
+                    overlayColor: MaterialStateColor.resolveWith((states) => Color(0xFF967509).withOpacity(0.1)),
                   ),
                   onPressed: () => onPressedFn(),
                   child: isSearchPressed
@@ -68,8 +68,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                 SizedBox(width: 88.0),
                 TextButton(
                   style: ButtonStyle(
-                    overlayColor: MaterialStateColor.resolveWith(
-                        (states) => Color(0xFF967509).withOpacity(0.1)),
+                    overlayColor: MaterialStateColor.resolveWith((_) => Color(0xFF967509).withOpacity(0.1)),
                   ),
                   onPressed: () => onPressedFn(),
                   child: isFavoritesPressed

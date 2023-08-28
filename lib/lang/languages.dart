@@ -6,7 +6,7 @@ mixin AppLocale {
   static const String alertSearchErrorDesc =
       "An error occurred searching the book 😥: ";
   static const String hintText = "Search by title, author or topic";
-  static const String homeDescription =
+  static const String homeEmptyResults =
       "Your results will appear here. Let's start searching! 🙂";
   static const String bookMoreDetails = "Google Books info";
   static const String bookDescription = "See full description";
@@ -20,6 +20,8 @@ mixin AppLocale {
   static const String removeFavorite = "Remove favorite";
   static const String authorsConnector = "and";
   static const String aboutBook = "About the book";
+  static const String favoritesEmptyResults =
+      "You don't have any favorite book. Let's start adding it! 🙂";
 
   static const Map<String, dynamic> EN = {
     alertEmptyTitleHeader: "Empty title",
@@ -28,7 +30,8 @@ mixin AppLocale {
     alertSearchErrorHeader: "An error occurred",
     alertSearchErrorDesc: "An error occurred searching the book 😥: ",
     hintText: "Search by title, author or topic",
-    homeDescription: "Your results will appear here. Let's start searching! 🙂",
+    homeEmptyResults:
+        "Your results will appear here. Let's start searching! 🙂",
     bookMoreDetails: "Google Books info",
     bookDescription: "See full description",
     bookAuthor: "By: ",
@@ -41,6 +44,8 @@ mixin AppLocale {
     removeFavorite: "Remove favorite",
     authorsConnector: "and",
     aboutBook: "About the book",
+    favoritesEmptyResults:
+        "You don't have any favorite book yet. Let's back to search and add some! 🙂"
   };
   static const Map<String, dynamic> ES = {
     alertEmptyTitleHeader: "Título en blanco",
@@ -49,7 +54,7 @@ mixin AppLocale {
     alertSearchErrorHeader: "Ha ocurrido un error",
     alertSearchErrorDesc: "Ha ocurrido un error buscando el libro 😥: ",
     hintText: "Buscar por título, autor o tema",
-    homeDescription: "Tus resultados aparecerán aquí. ¡Empecemos a buscar! 🙂",
+    homeEmptyResults: "Tus resultados aparecerán aquí. ¡Empecemos a buscar! 🙂",
     bookMoreDetails: "Google Books info",
     bookDescription: "Ver descripción",
     bookAuthor: "Por: ",
@@ -62,5 +67,7 @@ mixin AppLocale {
     removeFavorite: "Eliminar favorito",
     authorsConnector: "y",
     aboutBook: "Sobre el libro",
+    favoritesEmptyResults:
+        "Todavía no tienes ningún libro favorito. ¡Volvamos a buscar y agregar algunos! 🙂"
   };
 }
