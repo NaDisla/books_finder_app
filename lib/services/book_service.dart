@@ -10,7 +10,7 @@ class BookService {
 
   Future<List<Item>> getAllBooks(String title) async {
     Book parsedBooks;
-    Uri baseUrlParsed = Uri.parse("$baseUrl$title$maxResults");
+    Uri baseUrlParsed = Uri.parse("$baseUrl$title$maxResults&printType=books");
     http.Response booksResponse = await client.get(baseUrlParsed);
 
     if (booksResponse.statusCode == 200) {
