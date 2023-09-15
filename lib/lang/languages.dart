@@ -1,7 +1,5 @@
 mixin AppLocale {
   static const String alertSearchingBook = "Searching book...";
-  static const String alertSearchErrorHeader = "An error occurred";
-  static const String alertSearchErrorDesc = "An error occurred searching the book 😥: ";
   static const String hintText = "Search by title, author or topic";
   static const String homeEmptyResults = "Your results will appear here. Let's start searching! 🙂";
   static const String bookMoreDetails = "Google Books info";
@@ -19,8 +17,6 @@ mixin AppLocale {
 
   static const Map<String, dynamic> EN = {
     alertSearchingBook: "Searching book...",
-    alertSearchErrorHeader: "An error occurred",
-    alertSearchErrorDesc: "An error occurred searching the book 😥: ",
     hintText: "Search by title, author or topic",
     homeEmptyResults: "Your results will appear here. Let's start searching! 🙂",
     bookMoreDetails: "Google Books info",
@@ -39,8 +35,6 @@ mixin AppLocale {
 
   static const Map<String, dynamic> ES = {
     alertSearchingBook: "Buscando libro...",
-    alertSearchErrorHeader: "Ha ocurrido un error",
-    alertSearchErrorDesc: "Ha ocurrido un error buscando el libro 😥: ",
     hintText: "Buscar por título, autor o tema",
     homeEmptyResults: "Tus resultados aparecerán aquí. ¡Empecemos a buscar! 🙂",
     bookMoreDetails: "Google Books info",
