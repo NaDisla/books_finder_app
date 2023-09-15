@@ -27,8 +27,10 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
   void getFavoritesBooks() async {
     savedFavBooks = await Utils.getFavoritesBooks();
-    List<Item> savedFavBooksParsed = savedFavBooks.map((map) => Item.fromApiItems(jsonDecode(map))).toList();
-    setState(() => isFavorite = savedFavBooksParsed.any((book) => book.id == widget.book.id));
+    List<Item> savedFavBooksParsed =
+        savedFavBooks.map((map) => Item.fromApiItems(jsonDecode(map))).toList();
+    setState(() => isFavorite =
+        savedFavBooksParsed.any((book) => book.id == widget.book.id));
   }
 
   @override
@@ -39,6 +41,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool hasNotch = MediaQuery.of(context).viewPadding.top > 24;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -49,34 +52,36 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             color: Colors.black,
           ),
         ),
-        title: Row(
-          children: [
-            Lottie.asset(
-              'assets/icon-home.json',
-              width: 90.0,
-              height: 90.0,
-            ),
-            Text(
-              'BooksFinder',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF786C44),
-                fontStyle: FontStyle.normal,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 30.0),
+          child: Row(
+            children: [
+              Lottie.asset(
+                'assets/icon-home.json',
+                width: 90.0,
+                height: 90.0,
               ),
-            ),
-          ],
+              Text(
+                'BooksFinder',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF786C44),
+                  fontStyle: FontStyle.normal,
+                ),
+              ),
+            ],
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      extendBody: true,
       body: BackgroundWidget(
         color: Colors.white.withOpacity(0.75),
         child: Padding(
-          padding: const EdgeInsets.only(
-            top: 90.0,
+          padding: EdgeInsets.only(
+            top: hasNotch ? 120.0 : 90.0,
             bottom: 20.0,
             left: 20.0,
             right: 20.0,
@@ -144,7 +149,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           ],
                         ),
                         SizedBox(height: 10.0),
-                        AuthorsListWidget(currentAuthors: widget.book.volumeInfo.authors),
+                        AuthorsListWidget(
+                            currentAuthors: widget.book.volumeInfo.authors),
                         SizedBox(height: 10.0),
                         widget.book.volumeInfo.publishedDate != ''
                             ? Text(
@@ -152,24 +158,29 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 style: Utils.authorDateStyle,
                               )
                             : Text(
-                                AppLocale.bookUnknownPublishedDate.getString(context),
+                                AppLocale.bookUnknownPublishedDate
+                                    .getString(context),
                                 style: Utils.authorDateStyle,
                               ),
                         SizedBox(height: 10.0),
                         isFavorite
                             ? BookButtonInfoWidget(
-                                text: AppLocale.removeFavorite.getString(context),
+                                text:
+                                    AppLocale.removeFavorite.getString(context),
                                 onPressedFn: () async {
-                                  Utils.setFavoritesBooks(savedFavBooks, widget.book, "remove");
+                                  Utils.setFavoritesBooks(
+                                      savedFavBooks, widget.book, "remove");
                                   setState(() => isFavorite = false);
                                 },
                                 icon: Icons.remove_circle_sharp,
                                 btnColor: Utils.darkRedColor,
                               )
                             : BookButtonInfoWidget(
-                                text: AppLocale.addToFavorites.getString(context),
+                                text:
+                                    AppLocale.addToFavorites.getString(context),
                                 onPressedFn: () async {
-                                  Utils.setFavoritesBooks(savedFavBooks, widget.book, "add");
+                                  Utils.setFavoritesBooks(
+                                      savedFavBooks, widget.book, "add");
                                   setState(() => isFavorite = true);
                                 },
                                 icon: Icons.add_circle_sharp,
@@ -178,7 +189,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         SizedBox(height: 10.0),
                         BookButtonInfoWidget(
                           text: "Google Books info",
-                          onPressedFn: () => Utils.getGoogleBooksInfo(widget.book.id, widget.book.volumeInfo.title),
+                          onPressedFn: () => Utils.getGoogleBooksInfo(
+                              widget.book.id, widget.book.volumeInfo.title),
                           icon: Icons.arrow_forward_ios_rounded,
                           btnColor: Utils.darkYellowColor,
                         ),
