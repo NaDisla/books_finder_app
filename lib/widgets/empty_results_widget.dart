@@ -11,7 +11,6 @@ class EmptyResultsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(2.0),
       height: MediaQuery.of(context).size.height - 370,
       alignment: Alignment.center,
       child: Text(

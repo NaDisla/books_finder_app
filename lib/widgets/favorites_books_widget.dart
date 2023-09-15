@@ -30,12 +30,16 @@ class FavoritesBooksWidgetState extends State<FavoritesBooksWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double customPadding = MediaQuery.of(context).size.width * 0.03;
     return ValueListenableBuilder(
       valueListenable: favoritesBooks,
       builder: (BuildContext context, List<Item> favBooks, Widget? child) {
         if (favBooks.isEmpty) {
-          return EmptyResultsWidget(
-            message: AppLocale.favoritesEmptyResults.getString(context),
+          return Padding(
+            padding: EdgeInsets.only(left: customPadding, right: customPadding),
+            child: EmptyResultsWidget(
+              message: AppLocale.favoritesEmptyResults.getString(context),
+            ),
           );
         } else {
           return BooksListWidget(bookItems: favBooks);

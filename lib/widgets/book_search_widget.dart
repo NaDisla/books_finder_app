@@ -43,6 +43,7 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double customPadding = MediaQuery.of(context).size.width * 0.017;
     return Column(
       children: [
         SizedBox(
@@ -77,7 +78,8 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
               ),
               filled: true,
               fillColor: Color(0xFFFFFCF1),
-              contentPadding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 20.0),
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 2.0, horizontal: 20.0),
             ),
           ),
         ),
@@ -100,8 +102,11 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
             child: BooksListWidget(bookItems: foundBooks),
           )
         else
-          EmptyResultsWidget(
-            message: AppLocale.homeEmptyResults.getString(context),
+          Padding(
+            padding: EdgeInsets.only(left: customPadding, right: customPadding),
+            child: EmptyResultsWidget(
+              message: AppLocale.homeEmptyResults.getString(context),
+            ),
           )
       ],
     );
