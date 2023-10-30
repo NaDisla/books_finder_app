@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -56,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () async => false,
       child: GestureDetector(
@@ -72,20 +74,18 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Color(0xFF8D8364).withOpacity(0.5),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 55,
-                ),
+                const SizedBox(height: 55),
                 SizedBox(
-                  height: 120,
+                  height: 120.0,
                   child: OverflowBox(
-                    minHeight: 170,
-                    maxHeight: 220,
+                    minHeight: 170.0,
+                    maxHeight: deviceWidth < 500 ? 220 : 270.0,
                     child: Visibility(
                       visible: isVisible,
                       child: Lottie.asset(
                         'assets/icon-home.json',
-                        width: 210.0,
-                        height: 210.0,
+                        width: deviceWidth < 500 ? 210.0 : 270.0,
+                        height: deviceWidth < 500 ? 210.0 : 270.0,
                       ),
                     ),
                   ),

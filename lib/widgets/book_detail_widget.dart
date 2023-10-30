@@ -8,10 +8,12 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 class BookDetailWidget extends StatelessWidget {
   final Item book;
+  final bool isMobile;
 
   const BookDetailWidget({
     super.key,
     required this.book,
+    required this.isMobile,
   });
 
   @override
@@ -23,33 +25,40 @@ class BookDetailWidget extends StatelessWidget {
         Text(
           book.volumeInfo.title,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 20.0,
+            fontSize: isMobile ? 20.0 : 24.0,
           ),
         ),
         SizedBox(height: 5.0),
-        AuthorsListWidget(currentAuthors: book.volumeInfo.authors),
+        AuthorsListWidget(
+          currentAuthors: book.volumeInfo.authors,
+          isMobile: isMobile,
+        ),
         SizedBox(height: 5.0),
         book.volumeInfo.publishedDate != ''
             ? Text(
                 book.volumeInfo.publishedDate,
-                style: Utils.authorDateStyle,
+                style: isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
               )
             : Text(
                 AppLocale.bookUnknownPublishedDate.getString(context),
-                style: Utils.authorDateStyle,
+                style: isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
               ),
         SizedBox(height: 5.0),
         BookButtonInfoWidget(
           text: AppLocale.bookDescription.getString(context),
           onPressedFn: () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => BookDetailScreen(book: book),
+              builder: (context) => BookDetailScreen(
+                book: book,
+                isMobile: isMobile,
+              ),
             ),
           ),
           icon: Icons.arrow_forward_ios_rounded,
           btnColor: Utils.darkYellowColor,
+          isMobile: isMobile,
         ),
       ],
     );

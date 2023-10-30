@@ -5,10 +5,12 @@ import 'package:transparent_image/transparent_image.dart';
 
 class BookImageWidget extends StatelessWidget {
   final Item book;
+  final bool isMobile;
 
   const BookImageWidget({
     super.key,
     required this.book,
+    required this.isMobile,
   });
 
   @override
@@ -25,6 +27,7 @@ class BookImageWidget extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => BookDetailScreen(
                 book: book,
+                isMobile: isMobile,
               ),
             ),
           );
@@ -37,8 +40,8 @@ class BookImageWidget extends StatelessWidget {
               placeholder: kTransparentImage,
               image: book.volumeInfo.imageLinks!.thumbnail,
               fit: BoxFit.fill,
-              width: 180.0,
-              height: 250.0,
+              width: isMobile ? 180.0 : 250.0,
+              height: isMobile ? 250.0 : 330.0,
             ),
           ),
         ),

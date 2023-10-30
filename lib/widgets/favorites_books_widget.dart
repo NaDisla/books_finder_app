@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:book_finder_app/core/utils.dart';
 import 'package:book_finder_app/lang/languages.dart';
 import 'package:book_finder_app/models/models.dart';
+import 'package:book_finder_app/responsive/responsive.dart';
 import 'package:book_finder_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -42,7 +43,10 @@ class FavoritesBooksWidgetState extends State<FavoritesBooksWidget> {
             ),
           );
         } else {
-          return BooksListWidget(bookItems: favBooks);
+          return ResponsiveLayout(
+            mobileScaffold: MobileScaffold(bookItems: favBooks),
+            tabletScaffold: TabletScaffold(bookItems: favBooks),
+          );
         }
       },
     );

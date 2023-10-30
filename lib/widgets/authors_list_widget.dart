@@ -5,8 +5,13 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 class AuthorsListWidget extends StatelessWidget {
   final List<String> currentAuthors;
+  final bool isMobile;
 
-  const AuthorsListWidget({super.key, required this.currentAuthors});
+  const AuthorsListWidget({
+    super.key,
+    required this.currentAuthors,
+    required this.isMobile,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +32,20 @@ class AuthorsListWidget extends StatelessWidget {
         finalAuthors,
         overflow: TextOverflow.ellipsis,
         maxLines: 2,
-        style: Utils.authorDateStyle,
+        style: isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
       );
     } else if (currentAuthors.length == 1) {
       return Text(
         "${AppLocale.bookAuthor.getString(context)} ${currentAuthors[0]}.",
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: Utils.authorDateStyle,
+        style: isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
       );
     } else {
-      return Text(AppLocale.bookUnknownAuthor.getString(context), style: Utils.authorDateStyle);
+      return Text(
+        AppLocale.bookUnknownAuthor.getString(context),
+        style: isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
+      );
     }
   }
 }

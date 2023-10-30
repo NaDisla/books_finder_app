@@ -5,6 +5,7 @@ class BookButtonInfoWidget extends StatelessWidget {
   final Function() onPressedFn;
   final IconData icon;
   final Color btnColor;
+  final bool isMobile;
 
   const BookButtonInfoWidget({
     super.key,
@@ -12,6 +13,7 @@ class BookButtonInfoWidget extends StatelessWidget {
     required this.onPressedFn,
     required this.icon,
     required this.btnColor,
+    required this.isMobile,
   });
 
   @override
@@ -21,17 +23,32 @@ class BookButtonInfoWidget extends StatelessWidget {
         onTap: onPressedFn,
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  fontStyle: FontStyle.italic,
-                  color: btnColor,
-                ),
-              ),
-            ),
+            isMobile
+                ? Expanded(
+                    child: Text(
+                      text,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: isMobile ? 16.0 : 20.0,
+                        fontStyle: FontStyle.italic,
+                        color: btnColor,
+                      ),
+                    ),
+                  )
+                : Row(
+                    children: [
+                      Text(
+                        text,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: isMobile ? 16.0 : 20.0,
+                          fontStyle: FontStyle.italic,
+                          color: btnColor,
+                        ),
+                      ),
+                      SizedBox(width: 10.0),
+                    ],
+                  ),
             Icon(icon, color: btnColor),
           ],
         ),
