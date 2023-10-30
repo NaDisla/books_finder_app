@@ -10,15 +10,14 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   bool isEnglish = true, isVisible = false;
   BookService bookService = BookService();
   final FlutterLocalization localization = FlutterLocalization.instance;
-  int navBarIndex = 0;
-  bool isSearchPressed = true, isFavoritesPressed = false;
+  static ValueNotifier<int> navBarIndex = ValueNotifier(0);
 
   void translate(bool value) {
     setState(() {
@@ -37,20 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.delayed(const Duration(milliseconds: 50), () {
       if (this.mounted) {
         setState(() => isVisible = true);
-      }
-    });
-  }
-
-  void controlNavBarButton() {
-    setState(() {
-      if (isFavoritesPressed) {
-        navBarIndex = 0;
-        isSearchPressed = true;
-        isFavoritesPressed = false;
-      } else if (isSearchPressed) {
-        navBarIndex = 1;
-        isFavoritesPressed = true;
-        isSearchPressed = false;
       }
     });
   }
@@ -108,24 +93,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 25.0),
                 Expanded(
-                  child: IndexedStack(
-                    index: navBarIndex,
-                    children: [
-                      BookSearchWidget(),
-                      FavoritesBooksWidget(),
-                    ],
-                  ),
+                  child: ValueListenableBuilder(
+                      valueListenable: navBarIndex,
+                      builder: (BuildContext context, int navIndex, Widget? child) {
+                        return IndexedStack(
+                          index: navIndex,
+                          children: [
+                            BookSearchWidget(),
+                            FavoritesBooksWidget(),
+                          ],
+                        );
+                      }),
                 ),
               ],
             ),
           ),
           floatingActionButton: SwitchLanguageWidget(translate: translate, isEnglish: isEnglish),
           floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-          bottomNavigationBar: BottomNavigationBarWidget(
-            isSearchPressed: isSearchPressed,
-            isFavoritesPressed: isFavoritesPressed,
-            onPressedFn: controlNavBarButton,
-          ),
+          bottomNavigationBar: BottomNavigationBarWidget(),
         ),
       ),
     );
