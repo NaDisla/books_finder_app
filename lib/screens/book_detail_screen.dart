@@ -42,7 +42,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   @override
   Widget build(BuildContext context) {
     bool hasNotch = MediaQuery.of(context).viewPadding.top > 24;
-    double separation = widget.isMobile ? 10.0 : 30.0;
+    double separation = widget.isMobile ? 10.0 : 30.0, deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -54,7 +54,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           ),
         ),
         title: Padding(
-          padding: widget.isMobile ? const EdgeInsets.only(left: 30.0) : const EdgeInsets.only(left: 220.0),
+          padding: widget.isMobile ? const EdgeInsets.only(left: 30.0) : EdgeInsets.only(left: deviceWidth * 0.30),
           child: Row(
             children: [
               Lottie.asset(

@@ -10,8 +10,10 @@ class TabletScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery.of(context).size.height;
     return Container(
-      height: 750,
+      height: deviceHeight - 320,
       alignment: Alignment.center,
       margin: const EdgeInsets.only(left: 10.0, right: 10.0, top: 5.0),
       child: FadeInLeft(
@@ -33,7 +35,7 @@ class TabletScaffold extends StatelessWidget {
                   left: 9.0,
                   bottom: 70.0,
                   child: SizedBox(
-                    width: 590.0,
+                    width: deviceWidth - 225,
                     child: Card(
                       color: Colors.white.withOpacity(0.8),
                       shape: RoundedRectangleBorder(
