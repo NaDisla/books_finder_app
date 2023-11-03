@@ -5,7 +5,7 @@ This is a new version of the BookFinder, previously made with Xamarin/C#. Now, B
 
 ## Download it!
 - [Get it on Google Play](https://play.google.com/store/apps/details?id=com.nadislat.books_finder_app)
-- [Get it on App Store](https://docs.flutter.dev/cookbook)
+- [Get it on App Store]([https://docs.flutter.dev/cookbook](https://apps.apple.com/app/booksfinderapp/id6446782060))
 
 | Android |  iOS  |
 |:-----:|:--------:|
