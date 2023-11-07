@@ -11,4 +11,5 @@ This is a new version of the BookFinder, previously made with Xamarin/C#. Now, B
 
 | Android |  iOS  |
 |:-----:|:--------:|
-|![android_preview](https://github.com/NaDisla/books_finder_app/assets/51084681/5e106096-2363-4d62-b6b5-1bdec905a79a)|![ios_preview](https://github.com/NaDisla/books_finder_app/assets/51084681/9ba4428e-f7b4-47e4-bec2-2d4086ab6f0f)|
+|![android_preview](https://github.com/NaDisla/books_finder_app/assets/51084681/f9f8841c-6105-4267-bf2c-51dc9448e2bf)|![ios_preview](https://github.com/NaDisla/books_finder_app/assets/51084681/d4e83281-99ce-489c-9801-a12e0df4f679)|
+
