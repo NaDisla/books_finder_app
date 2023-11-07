@@ -3,6 +3,8 @@
 Simple app to find any book, using the Google Books API.
 This is a new version of the BookFinder, previously made with Xamarin/C#. Now, BooksFinder is using Flutter/Dart💙 and has a new redefined UI/UX.
 
+<b>Updated: Nov 2023. </b><i>Now the users can save their favorites books for later.</i>
+
 ## Download it!
 - [Get it on Google Play](https://play.google.com/store/apps/details?id=com.nadislat.books_finder_app)
 - [Get it on App Store](https://apps.apple.com/app/booksfinderapp/id6446782060)
