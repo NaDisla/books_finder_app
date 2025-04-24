@@ -29,8 +29,10 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
   void getFavoritesBooks() async {
     savedFavBooks = await Utils.getFavoritesBooks();
-    List<Item> savedFavBooksParsed = savedFavBooks.map((map) => Item.fromApiItems(jsonDecode(map))).toList();
-    setState(() => isFavorite = savedFavBooksParsed.any((book) => book.id == widget.book.id));
+    List<Item> savedFavBooksParsed =
+        savedFavBooks.map((map) => Item.fromApiItems(jsonDecode(map))).toList();
+    setState(() => isFavorite =
+        savedFavBooksParsed.any((book) => book.id == widget.book.id));
   }
 
   @override
@@ -42,19 +44,22 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   @override
   Widget build(BuildContext context) {
     bool hasNotch = MediaQuery.of(context).viewPadding.top > 24;
-    double separation = widget.isMobile ? 10.0 : 30.0, deviceWidth = MediaQuery.of(context).size.width;
+    double separation = widget.isMobile ? 10.0 : 30.0,
+        deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.black,
           ),
         ),
         title: Padding(
-          padding: widget.isMobile ? const EdgeInsets.only(left: 30.0) : EdgeInsets.only(left: deviceWidth * 0.30),
+          padding: widget.isMobile
+              ? const EdgeInsets.only(left: 30.0)
+              : EdgeInsets.only(left: deviceWidth * 0.30),
           child: Row(
             children: [
               Lottie.asset(
@@ -62,7 +67,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                 width: 90.0,
                 height: 90.0,
               ),
-              Text(
+              const Text(
                 'BooksFinder',
                 style: TextStyle(
                   fontSize: 20.0,
@@ -79,7 +84,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         elevation: 0,
       ),
       body: BackgroundWidget(
-        color: Colors.white.withOpacity(0.75),
+        color: const Color.fromRGBO(255, 255, 255, 0.75),
         child: Padding(
           padding: EdgeInsets.only(
             top: hasNotch ? 120.0 : 90.0,
@@ -105,7 +110,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20.0),
+                  const SizedBox(width: 20.0),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,17 +122,19 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 30.0,
                               ),
                             ),
-                            if (widget.book.volumeInfo.title.length > 26 && widget.isMobile)
+                            if (widget.book.volumeInfo.title.length > 26 &&
+                                widget.isMobile)
                               Positioned(
                                 top: 52,
                                 bottom: 0,
                                 right: 0,
                                 child: Material(
+                                  color: Colors.transparent,
                                   child: InkWell(
                                     onTap: () => showDialog(
                                       context: context,
@@ -138,35 +145,43 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                             ),
                                           )),
                                     ),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.remove_red_eye,
                                       size: 20.5,
                                       color: Utils.darkYellowColor,
                                     ),
                                   ),
-                                  color: Colors.transparent,
                                 ),
                               ),
                           ],
                         ),
                         SizedBox(height: separation),
-                        AuthorsListWidget(currentAuthors: widget.book.volumeInfo.authors, isMobile: widget.isMobile),
+                        AuthorsListWidget(
+                            currentAuthors: widget.book.volumeInfo.authors,
+                            isMobile: widget.isMobile),
                         SizedBox(height: separation),
                         widget.book.volumeInfo.publishedDate != ''
                             ? Text(
                                 widget.book.volumeInfo.publishedDate,
-                                style: widget.isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
+                                style: widget.isMobile
+                                    ? Utils.authorMobileDateStyle
+                                    : Utils.authorTabletDateStyle,
                               )
                             : Text(
-                                AppLocale.bookUnknownPublishedDate.getString(context),
-                                style: widget.isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
+                                AppLocale.bookUnknownPublishedDate
+                                    .getString(context),
+                                style: widget.isMobile
+                                    ? Utils.authorMobileDateStyle
+                                    : Utils.authorTabletDateStyle,
                               ),
                         SizedBox(height: separation),
                         isFavorite
                             ? BookButtonInfoWidget(
-                                text: AppLocale.removeFavorite.getString(context),
+                                text:
+                                    AppLocale.removeFavorite.getString(context),
                                 onPressedFn: () async {
-                                  Utils.setFavoritesBooks(savedFavBooks, widget.book, "remove");
+                                  Utils.setFavoritesBooks(
+                                      savedFavBooks, widget.book, "remove");
                                   setState(() => isFavorite = false);
                                 },
                                 icon: Icons.remove_circle_sharp,
@@ -174,9 +189,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 isMobile: widget.isMobile,
                               )
                             : BookButtonInfoWidget(
-                                text: AppLocale.addToFavorites.getString(context),
+                                text:
+                                    AppLocale.addToFavorites.getString(context),
                                 onPressedFn: () async {
-                                  Utils.setFavoritesBooks(savedFavBooks, widget.book, "add");
+                                  Utils.setFavoritesBooks(
+                                      savedFavBooks, widget.book, "add");
                                   setState(() => isFavorite = true);
                                 },
                                 icon: Icons.add_circle_sharp,
@@ -186,7 +203,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         SizedBox(height: separation),
                         BookButtonInfoWidget(
                           text: "Google Books info",
-                          onPressedFn: () => Utils.getGoogleBooksInfo(widget.book.id, widget.book.volumeInfo.title),
+                          onPressedFn: () => Utils.getGoogleBooksInfo(
+                              widget.book.id, widget.book.volumeInfo.title),
                           icon: Icons.arrow_forward_ios_rounded,
                           btnColor: Utils.darkYellowColor,
                           isMobile: widget.isMobile,
@@ -197,25 +215,25 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 15.0),
-              Divider(
+              const SizedBox(height: 15.0),
+              const Divider(
                 color: Color(0xFF9C9C9C),
                 thickness: 2.0,
               ),
-              SizedBox(height: 15.0),
+              const SizedBox(height: 15.0),
               Text(
                 AppLocale.aboutBook.getString(context),
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25.0,
                 ),
                 textAlign: TextAlign.start,
               ),
-              SizedBox(height: 15.0),
+              const SizedBox(height: 15.0),
               Expanded(
                 child: Scrollbar(
                   thickness: 5.0,
-                  radius: Radius.circular(5.0),
+                  radius: const Radius.circular(5.0),
                   child: SingleChildScrollView(
                     child: Text(
                       widget.book.volumeInfo.description,
@@ -224,7 +242,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         height: 1.5,
                         fontSize: widget.isMobile ? 18.0 : 22.0,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF646053),
+                        color: const Color(0xFF646053),
                       ),
                     ),
                   ),

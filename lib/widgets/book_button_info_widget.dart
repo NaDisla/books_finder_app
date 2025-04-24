@@ -19,6 +19,7 @@ class BookButtonInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.transparent,
       child: InkWell(
         onTap: onPressedFn,
         child: Row(
@@ -46,14 +47,13 @@ class BookButtonInfoWidget extends StatelessWidget {
                           color: btnColor,
                         ),
                       ),
-                      SizedBox(width: 10.0),
+                      const SizedBox(width: 10.0),
                     ],
                   ),
             Icon(icon, color: btnColor),
           ],
         ),
       ),
-      color: Colors.transparent,
     );
   }
 }

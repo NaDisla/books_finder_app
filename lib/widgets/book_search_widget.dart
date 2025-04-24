@@ -55,32 +55,33 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
             controller: searchController,
             textCapitalization: TextCapitalization.sentences,
             style: TextStyle(
-              color: Color(0xFF786C44),
+              color: const Color(0xFF786C44),
               fontWeight: FontWeight.bold,
               fontSize: deviceWidth < 500 ? 20.0 : 24.0,
             ),
             decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.search,
-                color: Color(0xFF786C44).withOpacity(0.7),
+                color: const Color.fromRGBO(120, 108, 68, 0.7),
                 size: deviceWidth < 500 ? 28.0 : 35.0,
               ),
               hintText: AppLocale.hintText.getString(context),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),
               hintStyle: TextStyle(
-                color: Color(0xFF786C44).withOpacity(0.7),
+                color: const Color.fromRGBO(120, 108, 68, 0.7),
                 fontWeight: FontWeight.bold,
                 fontSize: deviceWidth < 500 ? 20.0 : 24.0,
               ),
-              border: OutlineInputBorder(
+              border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 borderSide: BorderSide.none,
               ),
               filled: true,
-              fillColor: Color(0xFFFFFCF1),
-              contentPadding: EdgeInsets.symmetric(vertical: deviceWidth < 500 ? 10.0 : 12.0, horizontal: 20.0),
+              fillColor: const Color(0xFFFFFCF1),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: deviceWidth < 500 ? 10.0 : 12.0, horizontal: 20.0),
             ),
           ),
         ),
@@ -93,12 +94,12 @@ class _BookSearchWidgetState extends State<BookSearchWidget> {
               width: 100.0,
               height: 100.0,
             ),
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
           )
         else if (foundBooks.isNotEmpty)
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height - 370,
             child: ResponsiveLayout(
               mobileScaffold: MobileScaffold(bookItems: foundBooks),

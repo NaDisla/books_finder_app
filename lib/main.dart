@@ -5,14 +5,15 @@ import 'package:book_finder_app/screens/screens.dart';
 import 'package:book_finder_app/services/custom_http_overrides.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:upgrader/upgrader.dart';
 
 void main() {
   HttpOverrides.global = CustomHttpOverrides();
-  runApp(BookFinderApp());
+  runApp(const BookFinderApp());
 }
 
 class BookFinderApp extends StatefulWidget {
-  BookFinderApp({super.key});
+  const BookFinderApp({super.key});
 
   @override
   State<BookFinderApp> createState() => _BookFinderAppState();
@@ -25,8 +26,8 @@ class _BookFinderAppState extends State<BookFinderApp> {
   void initState() {
     _localization.init(
       mapLocales: [
-        const MapLocale('en', AppLocale.EN),
-        const MapLocale('es', AppLocale.ES),
+        const MapLocale('en', AppLocale.en),
+        const MapLocale('es', AppLocale.es),
       ],
       initLanguageCode: 'en',
     );
@@ -48,7 +49,7 @@ class _BookFinderAppState extends State<BookFinderApp> {
       supportedLocales: _localization.supportedLocales,
       localizationsDelegates: _localization.localizationsDelegates,
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: UpgradeAlert(child: const HomeScreen()),
     );
   }
 }

@@ -23,7 +23,6 @@ class BottomNavigationBarButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = MediaQuery.of(context).size.width;
     return isImageButton
         ? Column(
             children: [
@@ -46,16 +45,16 @@ class BottomNavigationBarButtonWidget extends StatelessWidget {
             ? Column(
                 children: [
                   SimpleShadow(
+                    opacity: 0.6,
+                    color: btnColor,
+                    offset: const Offset(0, 5),
+                    sigma: 7,
                     child: Image.asset(
                       imagePath!,
                       width: 28,
                       height: 28,
                       filterQuality: FilterQuality.high,
                     ),
-                    opacity: 0.6,
-                    color: btnColor,
-                    offset: Offset(0, 5),
-                    sigma: 7,
                   ),
                   Text(
                     btnText,

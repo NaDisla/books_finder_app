@@ -30,22 +30,26 @@ class BookDetailWidget extends StatelessWidget {
             fontSize: isMobile ? 20.0 : 24.0,
           ),
         ),
-        SizedBox(height: 5.0),
+        const SizedBox(height: 5.0),
         AuthorsListWidget(
           currentAuthors: book.volumeInfo.authors,
           isMobile: isMobile,
         ),
-        SizedBox(height: 5.0),
+        const SizedBox(height: 5.0),
         book.volumeInfo.publishedDate != ''
             ? Text(
                 book.volumeInfo.publishedDate,
-                style: isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
+                style: isMobile
+                    ? Utils.authorMobileDateStyle
+                    : Utils.authorTabletDateStyle,
               )
             : Text(
                 AppLocale.bookUnknownPublishedDate.getString(context),
-                style: isMobile ? Utils.authorMobileDateStyle : Utils.authorTabletDateStyle,
+                style: isMobile
+                    ? Utils.authorMobileDateStyle
+                    : Utils.authorTabletDateStyle,
               ),
-        SizedBox(height: 5.0),
+        const SizedBox(height: 5.0),
         BookButtonInfoWidget(
           text: AppLocale.bookDescription.getString(context),
           onPressedFn: () => Navigator.of(context).push(

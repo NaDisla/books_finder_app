@@ -34,7 +34,7 @@ class HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 50), () {
-      if (this.mounted) {
+      if (mounted) {
         setState(() => isVisible = true);
       }
     });
@@ -43,8 +43,8 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: GestureDetector(
         onTap: () {
           FocusScopeNode currentFocus = FocusScope.of(context);
@@ -56,7 +56,7 @@ class HomeScreenState extends State<HomeScreen> {
           extendBody: true,
           resizeToAvoidBottomInset: false,
           body: BackgroundWidget(
-            color: Color(0xFF8D8364).withOpacity(0.5),
+            color: const Color.fromRGBO(141, 131, 100, 0.5),
             child: Column(
               children: [
                 const SizedBox(height: 55),
@@ -75,7 +75,7 @@ class HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   'BooksFinder',
                   style: TextStyle(
                     fontSize: 30.0,
@@ -95,10 +95,11 @@ class HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: ValueListenableBuilder(
                       valueListenable: navBarIndex,
-                      builder: (BuildContext context, int navIndex, Widget? child) {
+                      builder:
+                          (BuildContext context, int navIndex, Widget? child) {
                         return IndexedStack(
                           index: navIndex,
-                          children: [
+                          children: const [
                             BookSearchWidget(),
                             FavoritesBooksWidget(),
                           ],
@@ -108,9 +109,10 @@ class HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          floatingActionButton: SwitchLanguageWidget(translate: translate, isEnglish: isEnglish),
+          floatingActionButton:
+              SwitchLanguageWidget(translate: translate, isEnglish: isEnglish),
           floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-          bottomNavigationBar: BottomNavigationBarWidget(),
+          bottomNavigationBar: const BottomNavigationBarWidget(),
         ),
       ),
     );

@@ -1,0 +1,2 @@
+D:/NaDisla/Projects/books_finder_app/android/app/.cxx/Debug/5a2h6116/x86/CMakeFiles/edit_cache.dir
+D:/NaDisla/Projects/books_finder_app/android/app/.cxx/Debug/5a2h6116/x86/CMakeFiles/rebuild_cache.dir

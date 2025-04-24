@@ -37,7 +37,7 @@ class TabletScaffold extends StatelessWidget {
                   child: SizedBox(
                     width: deviceWidth - 225,
                     child: Card(
-                      color: Colors.white.withOpacity(0.8),
+                      color: const Color.fromRGBO(255, 255, 255, 0.8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),

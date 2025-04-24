@@ -10,7 +10,8 @@ class BottomNavigationBarWidget extends StatefulWidget {
   const BottomNavigationBarWidget({super.key});
 
   @override
-  State<BottomNavigationBarWidget> createState() => _BottomNavigationBarWidgetState();
+  State<BottomNavigationBarWidget> createState() =>
+      _BottomNavigationBarWidgetState();
 }
 
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
@@ -18,7 +19,9 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Shadow> shadowList = const <Shadow>[Shadow(color: Color(0xFF967509), blurRadius: 20.0, offset: Offset(0, 5))];
+    const List<Shadow> shadowList = <Shadow>[
+      Shadow(color: Color(0xFF967509), blurRadius: 20.0, offset: Offset(0, 5))
+    ];
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(10.0),
@@ -28,9 +31,9 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
         child: Container(
           height: 90,
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.4),
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(255, 255, 255, 0.4),
+            borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10.0),
               topRight: Radius.circular(10.0),
             ),
@@ -42,7 +45,8 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
               children: [
                 TextButton(
                   style: ButtonStyle(
-                    overlayColor: MaterialStateColor.resolveWith((states) => Color(0xFF967509).withOpacity(0.1)),
+                    overlayColor: WidgetStateColor.resolveWith(
+                        (states) => const Color.fromRGBO(150, 117, 9, 0.1)),
                   ),
                   onPressed: () {
                     setState(() {
@@ -56,7 +60,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                   child: isSearchPressed
                       ? BottomNavigationBarButtonWidget(
                           icon: Icons.search,
-                          btnColor: Color(0xFF967509),
+                          btnColor: const Color(0xFF967509),
                           btnText: AppLocale.btnSearch.getString(context),
                           isImageButton: false,
                           isImageButtonSelected: false,
@@ -70,10 +74,11 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                           isImageButtonSelected: false,
                         ),
                 ),
-                SizedBox(width: 88.0),
+                const SizedBox(width: 88.0),
                 TextButton(
                   style: ButtonStyle(
-                    overlayColor: MaterialStateColor.resolveWith((_) => Color(0xFF967509).withOpacity(0.1)),
+                    overlayColor: WidgetStateColor.resolveWith(
+                        (_) => const Color.fromRGBO(150, 117, 9, 0.1)),
                   ),
                   onPressed: () {
                     setState(() {
@@ -87,7 +92,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                   child: isFavoritesPressed
                       ? BottomNavigationBarButtonWidget(
                           imagePath: 'assets/images/favorite_orange_icon.png',
-                          btnColor: Color(0xFF967509),
+                          btnColor: const Color(0xFF967509),
                           btnText: AppLocale.btnFavorites.getString(context),
                           isImageButton: false,
                           isImageButtonSelected: true,

@@ -1,7 +1,8 @@
 mixin AppLocale {
   static const String alertSearchingBook = "Searching book...";
   static const String hintText = "Search by title, author or topic";
-  static const String homeEmptyResults = "Your results will appear here. Let's start searching! 🙂";
+  static const String homeEmptyResults =
+      "Your results will appear here. Let's start searching! 🙂";
   static const String bookMoreDetails = "Google Books info";
   static const String bookDescription = "See full description";
   static const String bookAuthor = "By: ";
@@ -13,12 +14,14 @@ mixin AppLocale {
   static const String removeFavorite = "Remove favorite";
   static const String authorsConnector = "and";
   static const String aboutBook = "About the book";
-  static const String favoritesEmptyResults = "You don't have any favorite book. Let's start adding it! 🙂";
+  static const String favoritesEmptyResults =
+      "You don't have any favorite book. Let's start adding it! 🙂";
 
-  static const Map<String, dynamic> EN = {
+  static const Map<String, dynamic> en = {
     alertSearchingBook: "Searching book...",
     hintText: "Search by title, author or topic",
-    homeEmptyResults: "Your results will appear here. Let's start searching! 🙂",
+    homeEmptyResults:
+        "Your results will appear here. Let's start searching! 🙂",
     bookMoreDetails: "Google Books info",
     bookDescription: "See full description",
     bookAuthor: "By: ",
@@ -30,10 +33,11 @@ mixin AppLocale {
     removeFavorite: "Remove favorite",
     authorsConnector: "and",
     aboutBook: "About the book",
-    favoritesEmptyResults: "You don't have any favorite book yet. Let's back to search and add some! 🙂"
+    favoritesEmptyResults:
+        "You don't have any favorite book yet. Let's back to search and add some! 🙂"
   };
 
-  static const Map<String, dynamic> ES = {
+  static const Map<String, dynamic> es = {
     alertSearchingBook: "Buscando libro...",
     hintText: "Buscar por título, autor o tema",
     homeEmptyResults: "Tus resultados aparecerán aquí. ¡Empecemos a buscar! 🙂",
@@ -48,6 +52,7 @@ mixin AppLocale {
     removeFavorite: "Eliminar favorito",
     authorsConnector: "y",
     aboutBook: "Sobre el libro",
-    favoritesEmptyResults: "Todavía no tienes ningún libro favorito. ¡Volvamos a buscar y agregar algunos! 🙂"
+    favoritesEmptyResults:
+        "Todavía no tienes ningún libro favorito. ¡Volvamos a buscar y agregar algunos! 🙂"
   };
 }

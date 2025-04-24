@@ -16,7 +16,9 @@ class BookService {
     if (booksResponse.statusCode == 200) {
       String jsonBooks = booksResponse.body;
       parsedBooks = Book.fromApiBooks(json.decode(jsonBooks));
-      List<Item> cleanedBooks = parsedBooks.items.where((book) => book.volumeInfo.description.isNotEmpty).toList();
+      List<Item> cleanedBooks = parsedBooks.items
+          .where((book) => book.volumeInfo.description.isNotEmpty)
+          .toList();
 
       return cleanedBooks;
     } else {
@@ -25,7 +27,8 @@ class BookService {
   }
 
   static String getBookUrl(String id, String volumeInfoTitle) {
-    String launchUrlBook = "https://books.google.com.do/books?id=${id}&dq=${volumeInfoTitle}";
+    String launchUrlBook =
+        "https://books.google.com.do/books?id=$id&dq=$volumeInfoTitle";
     return launchUrlBook;
   }
 }
